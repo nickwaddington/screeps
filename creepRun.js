@@ -9,11 +9,10 @@ module.exports = function() {
             status = 'idle'
             break;
         case 1: //Move to target
+        	if(typeof this.memory.pathTarget === 'undefined') {
+        		this.memory.pathTarget = this.room.findPath(this.memory.homePos, this.memory.targetPos);
+        	}
         	status = this.moveByPath(this.memory.pathTarget);
-            if(status !== 0) {
-            	this.memory.pathTarget = this.room.findPath(this.memory.home, this.memory.target.pos);
-            	this.moveByPath(this.memory.pathTarget);
-            }
             break;
         case 3: //Mine
             status = this.harvest(this.memory.target);
