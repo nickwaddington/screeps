@@ -1,3 +1,3 @@
-# hello-world
+# Screeps strategy code
 
-Test program
+Author: Nick Waddington
