@@ -1,14 +1,16 @@
 module.exports = function() {
+    var status;
+    
     switch(this.memory.action) {
         case 0: //Do nothing
             break;
         case 1: //Move to target
-        	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1])) {
+        	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1].x,this.memory.pathTarget[this.memory.pathTarget.length-1].y)) {
         	    this.memory.action = 3;
         	}
             break;
         case 2: //Move to home
-        	if(this.pos.isEqualTo(this.memory.pathHome[this.memory.pathHome.length-1])) {
+        	if(this.pos.isEqualTo(this.memory.pathHome[this.memory.pathHome.length-1].x,this.memory.pathHome[this.memory.pathHome.length-1].y)) {
         	    this.memory.action = 4;
         	}
             break;
@@ -27,7 +29,6 @@ module.exports = function() {
             this.memory.action = 0;
     }
     
-    var status;
     switch(this.memory.action) {
         case 0: //Do nothing
             status = 'idle'
@@ -48,5 +49,5 @@ module.exports = function() {
             console.log('Error: ' + this.memory.action + ' is not a valid action');
     }
     
-    this.say(status);
+    this.say(this.memory.action + ', ' + status);
 };
