@@ -8,7 +8,7 @@ module.exports = function() {
         	}
             break;
         case 2: //Move to home
-        	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1])) {
+        	if(this.pos.isEqualTo(this.memory.pathHome[this.memory.pathHome.length-1])) {
         	    this.memory.action = 4;
         	}
             break;
