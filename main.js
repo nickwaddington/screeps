@@ -1,4 +1,5 @@
 Creep.prototype.run = require('creepRun');
+Creep.prototype.harvester = require('harvester.js');
 
 module.exports.loop = function () {
     var timeCurrent = Game.time;
@@ -20,7 +21,7 @@ module.exports.loop = function () {
         var path = homePos.findPathTo(targetPos);
         var pathH = targetPos.findPathTo(homePos);
         
-        spawn.createCreep([WORK,CARRY,MOVE], null, {action: 1, home: spawn.id, target: source.id, pathTarget: path, pathHome: pathH});
+        spawn.createCreep([WORK,CARRY,MOVE], null, {role: 'harvester', action: 1, home: spawn.id, target: source.id, pathTarget: path, pathHome: pathH});
     }
     
     for(var currentCreep in Game.creeps) {
