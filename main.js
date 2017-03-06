@@ -17,8 +17,10 @@ module.exports.loop = function () {
         var source = rm.find(FIND_SOURCES)[0];
         var homePos = rm.getPositionAt(spawn.pos.x, spawn.pos.y - 1);
         var targetPos = rm.getPositionAt(source.pos.x - 1, source.pos.y + 1);
+        var path = homePos.findPathTo(targetPos);
+        var pathH = targetPos.findPathTo(homePos);
         
-        spawn.createCreep([WORK,CARRY,MOVE], null, {action: 1, homePos: homePos, targetPos: targetPos, home: spawn, target: source});
+        spawn.createCreep([WORK,CARRY,MOVE], null, {action: 1, home: spawn, target: source.id, pathTarget: path, pathHome: pathH});
     }
     
     for(var currentCreep in Game.creeps) {
