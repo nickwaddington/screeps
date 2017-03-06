@@ -3,14 +3,23 @@ module.exports = function() {
         case 0: //Do nothing
             break;
         case 1: //Move to target
-        	if(this.pos.x === this.memory.pathTarget[this.memory.pathTarget.length-1].x
-        	&& this.pos.y === this.memory.pathTarget[this.memory.pathTarget.length-1].y) {
+        	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1])) {
         	    this.memory.action = 3;
+        	}
+            break;
+        case 2: //Move to home
+        	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1])) {
+        	    this.memory.action = 4;
         	}
             break;
         case 3: //Mine
             if(this.carry.energy === this.carryCapacity) {
                 this.memory.action = 2;
+            }
+            break;
+        case 4: //Mine
+            if(this.carry.energy === 0) {
+                this.memory.action = 1;
             }
             break;
         default:
@@ -26,9 +35,15 @@ module.exports = function() {
         case 1: //Move to target
         	status = this.moveByPath(this.memory.pathTarget);
             break;
+        case 2: //Move to home
+        	status = this.moveByPath(this.memory.pathHome);
+            break;
         case 3: //Mine
             status = this.harvest(Game.getObjectById(this.memory.target));
             break;
+        case 4: //Drop off at home
+        	status = this.transfer(this.memory.home, RESOURCE_ENERGY);
+        	break;
         default:
             console.log('Error: ' + this.memory.action + ' is not a valid action');
     }
