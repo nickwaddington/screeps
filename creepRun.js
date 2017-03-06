@@ -2,7 +2,6 @@
 
 module.exports = function() {
     var status;
-    this.memory.action = 1;
     
     switch(this.memory.action) {
         case 0: //Do nothing
