@@ -17,7 +17,7 @@ module.exports = function() {
                 this.memory.action = 2;
             }
             break;
-        case 4: //Mine
+        case 4: //Transfer to home
             if(this.carry.energy === 0) {
                 this.memory.action = 1;
             }
@@ -42,7 +42,7 @@ module.exports = function() {
             status = this.harvest(Game.getObjectById(this.memory.target));
             break;
         case 4: //Drop off at home
-        	status = this.transfer(this.memory.home, RESOURCE_ENERGY);
+        	status = this.transfer(Game.getObjectById(this.memory.home), RESOURCE_ENERGY);
         	break;
         default:
             console.log('Error: ' + this.memory.action + ' is not a valid action');
