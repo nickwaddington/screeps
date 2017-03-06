@@ -1,5 +1,5 @@
 Creep.prototype.run = require('creepRun');
-Creep.prototype.harvester = require('harvester.js');
+Creep.prototype.harvester = require('harvester');
 
 module.exports.loop = function () {
     var timeCurrent = Game.time;
