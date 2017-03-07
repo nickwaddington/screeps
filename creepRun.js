@@ -5,6 +5,9 @@ module.exports = function() {
     	case 'harvester':
     		this.harvester();
     		break;
+		case 'containerHarvester':
+			this.containerHarvester();
+			break;
 		default:
 			console.log('unknown role');
     }
@@ -25,6 +28,12 @@ module.exports = function() {
         case 4: //Drop off at home
         	status = this.transfer(Game.getObjectById(this.memory.home), RESOURCE_ENERGY);
         	break;
+    	case 5: //Build
+    		status = this.build(Game.getObjectById(this.memory.home));
+			break;
+		case 6: //Repair
+			status = this.repair(Game.getObjectById(this.memory.home));
+			break;
         default:
             console.log('Error: ' + this.memory.action + ' is not a valid action');
     }
