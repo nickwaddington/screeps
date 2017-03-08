@@ -2,6 +2,9 @@ Creep.prototype.run = require('creepRun');
 Creep.prototype.harvester = require('harvester');
 Creep.prototype.containerHarvester = require('containerHarvester');
 
+Room.prototype.run = require('roomRun');
+Room.prototype.spawn = require('roomSpawn');
+
 module.exports.loop = function () {
     var timeCurrent = Game.time;
     
@@ -15,15 +18,7 @@ module.exports.loop = function () {
     for(var currentRoom in Game.rooms) {
         var rm = Game.rooms[currentRoom];
         
-        var spawn = rm.find(FIND_MY_SPAWNS)[0];
-        var source = rm.find(FIND_SOURCES)[0];
-        var homePos = rm.getPositionAt(spawn.pos.x, spawn.pos.y - 1);
-        var targetPos = rm.getPositionAt(source.pos.x - 1, source.pos.y + 1);
-        var path = homePos.findPathTo(targetPos);
-        var pathH = targetPos.findPathTo(homePos);
-        var buildType = STRUCTURE_CONTAINER;
-        
-        spawn.createCreep([WORK,CARRY,MOVE], null, {role: 'containerHarvester', action: 1, home: spawn.id, target: source.id, pathTarget: path, pathHome: pathH, buildType: buildType});
+        rm.run();
     }
     
     for(var currentCreep in Game.creeps) {
