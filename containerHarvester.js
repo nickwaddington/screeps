@@ -4,29 +4,25 @@ module.exports = function() {
         	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1].x,this.memory.pathTarget[this.memory.pathTarget.length-1].y)) {
         	    this.memory.action = 3;
         	    delete this.memory.home;
+        	    this.room.createConstructionSite(this.pos, this.memory.buildType);
         	}
             break;
         case 3: //Mine
             if(this.carry.energy === this.carryCapacity) {
-            	if(this.memory.home) { //If container has been built
-            		var container = Game.getObjectById(this.memory.home);
+            	var container = Game.getObjectById(this.memory.home);
             		
-            		if(true/*if not finished building*/) {
-            			this.memory.action = 5;
-            		}
-            		else {
-            			if(container.hits < 0.8 * container.hitsMax) { //If below 80% repair
-	                		this.memory.action = 6;
-	                	}
-	                	else { //Otherwise transfer to container
-	                		this.memory.action = 4;
-	                	}
-            		}
-                }
-                else { //no container, build it
-                	this.room.createConstructionSite(this.pos, this.memory.buildType);
-                	this.memory.action = 5;
-                }
+        		if(true/*if not finished building*/) {
+        			this.memory.action = 5;
+        		}
+        		else {
+        			if(container.hits < 0.8 * container.hitsMax) { //If below 80% repair
+                		this.memory.action = 6;
+                	}
+                	else { //Otherwise transfer to container
+                		this.memory.action = 4;
+                	}
+        		}
+                
             }
             break;
         case 4: //Transfer to container
