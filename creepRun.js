@@ -29,7 +29,12 @@ module.exports = function() {
         	status = this.transfer(Game.getObjectById(this.memory.home), RESOURCE_ENERGY);
         	break;
     	case 5: //Build
-    		status = this.build(Game.getObjectById(this.memory.home));
+    		if(!this.memory.home) {
+    			status = 'notready';
+    		}
+    		else {
+    			status = this.build(Game.getObjectById(this.memory.home));
+    		}
 			break;
 		case 6: //Repair
 			status = this.repair(Game.getObjectById(this.memory.home));

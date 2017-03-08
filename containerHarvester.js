@@ -25,7 +25,6 @@ module.exports = function() {
                 }
                 else { //no container, build it
                 	this.room.createConstructionSite(this.pos, this.memory.buildType);
-                	this.memory.home = this.room.lookForAt(LOOK_CONSTRUCTION_SITES, this.pos)[0].id; //TODO throws error on first time
                 	this.memory.action = 5;
                 }
             }
@@ -36,7 +35,10 @@ module.exports = function() {
             }
             break;
         case 5: //Build container
-        	//this.memory.home = TODO;
+        	if(!this.memory.home) { //look for container if not in memory
+        		this.memory.home = this.room.lookForAt(LOOK_CONSTRUCTION_SITES, this.pos)[0].id;
+        	}
+        	
         	if(this.carry.energy === 0) {
                 this.memory.action = 3;
             }
