@@ -8,7 +8,7 @@ module.exports = function() {
         	}
             break;
         case 3: //Mine
-            if(this.carry.energy > 0.1 * this.carryCapacity) {
+            if(this.carry.energy > this.carryCapacity) {
             	var container = Game.getObjectById(this.memory.home);
             		
         		if(true/*if not finished building*/) {
