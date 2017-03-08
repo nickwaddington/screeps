@@ -8,10 +8,13 @@ module.exports = function() {
         	}
             break;
         case 3: //Mine
-            if(this.carry.energy === this.carryCapacity) {
+            if(this.carry.energy > 0.1 * this.carryCapacity) {
             	var container = Game.getObjectById(this.memory.home);
             		
         		if(true/*if not finished building*/) {
+        			if(!this.memory.home) { //look for container if not in memory
+		        		this.memory.home = this.room.lookForAt(LOOK_CONSTRUCTION_SITES, this.pos)[0].id;
+		        	}
         			this.memory.action = 5;
         		}
         		else {
@@ -31,10 +34,6 @@ module.exports = function() {
             }
             break;
         case 5: //Build container
-        	if(!this.memory.home) { //look for container if not in memory
-        		this.memory.home = this.room.lookForAt(LOOK_CONSTRUCTION_SITES, this.pos)[0].id;
-        	}
-        	
         	if(this.carry.energy === 0) {
                 this.memory.action = 3;
             }
