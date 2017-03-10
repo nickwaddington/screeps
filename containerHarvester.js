@@ -4,11 +4,11 @@ module.exports = function() {
         	if(this.pos.isEqualTo(this.memory.pathTarget[this.memory.pathTarget.length-1].x,this.memory.pathTarget[this.memory.pathTarget.length-1].y)) {
         	    this.memory.action = 3;
         	    delete this.memory.home;
-        	    this.room.createConstructionSite(this.pos, this.memory.buildType);
+        	    this.room.createConstructionSite(this.pos, STRUCTURE_CONTAINER);
         	}
             break;
         case 3: //Mine
-            if(this.carry.energy > this.carryCapacity) {
+            if(this.carry.energy === this.carryCapacity) {
             	var container = Game.getObjectById(this.memory.home);
             		
         		if(true/*if not finished building*/) {

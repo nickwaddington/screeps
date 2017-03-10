@@ -4,16 +4,17 @@ Creep.prototype.containerHarvester = require('containerHarvester');
 
 Room.prototype.run = require('roomRun');
 Room.prototype.spawn = require('roomSpawn');
+Room.prototype.initialise = require('roomInitialise');
 
 module.exports.loop = function () {
     var timeCurrent = Game.time;
     
     //clear dead creeps memory
-    for(var name in Memory.creeps) {
+    /*for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
         }
-    }
+    }*/
     
     for(var currentRoom in Game.rooms) {
         var rm = Game.rooms[currentRoom];
