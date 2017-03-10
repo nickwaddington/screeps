@@ -15,6 +15,8 @@ module.exports = function() {
 		}
 	}
 	
+	var status = roomSpawn(jobs[index]);
+	
 	if(typeof status === 'string') {
 		//assign job to creep
 		var c = Game.creeps[status];
