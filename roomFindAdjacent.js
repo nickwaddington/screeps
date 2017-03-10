@@ -1,4 +1,6 @@
 module.exports = function(p) {
+	//TODO add direction parameter
+	
 	var positions = this.lookForAtArea(LOOK_TERRAIN, p.y-1, p.x-1, p.y+1, p.x+1, true);
 	
 	var filtered = _.filter(positions, function(o) {
