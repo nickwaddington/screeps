@@ -15,7 +15,7 @@ module.exports = function() {
 		}
 	}
 	
-	var status = roomSpawn(jobs[index]);
+	var status = this.spawn(jobs[index]);
 	
 	if(typeof status === 'string') {
 		//assign job to creep
