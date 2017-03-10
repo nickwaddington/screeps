@@ -19,9 +19,7 @@ module.exports = function() {
 	
 	if(typeof status === 'string') {
 		//assign job to creep
-		var c = Game.creeps[status];
-		
-		Memory.jobs[index].assignedTo = c.id;
+		Memory.jobs[index].assignedTo = status;
 	}
 	
 };
