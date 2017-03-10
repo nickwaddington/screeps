@@ -5,6 +5,7 @@ Creep.prototype.containerHarvester = require('containerHarvester');
 Room.prototype.run = require('roomRun');
 Room.prototype.spawn = require('roomSpawn');
 Room.prototype.initialise = require('roomInitialise');
+Room.prototype.findAdjacent = require('roomFindAdjacent');
 
 module.exports.loop = function () {
     var timeCurrent = Game.time;

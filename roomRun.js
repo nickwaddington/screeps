@@ -15,11 +15,19 @@ module.exports = function() {
 		}
 	}
 	
-	var status = this.spawn(jobs[index]);
-	
-	if(typeof status === 'string') {
-		//assign job to creep
-		Memory.jobs[index].assignedTo = status;
+	if(index !== -1) {
+		var status = this.spawn(jobs[index]);
+		
+		if(typeof status === 'string') {
+			//assign job to creep
+			Memory.jobs[index].assignedTo = status;
+		}
 	}
+	
+	var src = this.find(FIND_SOURCES)[0];
+	
+	var adj = this.findAdjacent(src.pos);
+	
+	console.log(JSON.stringify(adj));
 	
 };
