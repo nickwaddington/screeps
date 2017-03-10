@@ -5,7 +5,7 @@ module.exports = function(p) {
 		return o.terrain !== 'wall';
 	});
 	
-	console.log(JSON.stringify(filtered));
+	var adj = filtered[0];
 	
-	return p;
+	return this.getPositionAt(adj.x, adj.y);
 };
