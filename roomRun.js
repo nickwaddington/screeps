@@ -29,7 +29,7 @@ module.exports = function() {
 				start: 0,
 				finish: 0, //sources[i].ticksToRegeneration + Game.time
 				amount: spawn.energyCapacity - spawn.energy,
-				location: sources[i].id,
+				location: spawn.id,
 				assignedTo: []
 			})
 		}
