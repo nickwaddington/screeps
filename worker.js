@@ -11,16 +11,15 @@ module.exports = function() {
             break;
         case 3: //Mine
             if(this.carry.energy === this.carryCapacity) {
-                this.memory.action = 0;
+                this.unclaimJob();
             }
             break;
         case 4: //Transfer to home
             if(this.carry.energy === 0) {
-                this.memory.action = 0;
+                this.unclaimJob();
             }
             break;
         default:
             console.log('Error: ' + this.memory.action + ' is not a valid action');
-            this.memory.action = 0;
     }
 }
