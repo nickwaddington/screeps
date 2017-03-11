@@ -1,6 +1,8 @@
 Creep.prototype.run = require('creepRun');
 Creep.prototype.harvester = require('harvester');
 Creep.prototype.containerHarvester = require('containerHarvester');
+Creep.prototype.worker = require('worker');
+Creep.prototype.claimJob = require('creepClaimJob');
 
 Room.prototype.run = require('roomRun');
 Room.prototype.spawn = require('roomSpawn');
@@ -30,6 +32,6 @@ module.exports.loop = function () {
         crp.run();
     }
     
-    //print time an cpu usage
+    //print time and cpu usage
     console.log("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU used");
 };

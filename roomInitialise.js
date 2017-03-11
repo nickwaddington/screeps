@@ -5,13 +5,13 @@ module.exports = function() {
 	
 	for(var i in sources) {
 		roomJobs.push({
-			type: 'harvester',
+			type: 3,
 			priority: 0,
 			start: 0,
 			finish: 0, //sources[i].ticksToRegeneration + Game.time
 			amount: sources[i].energy,
 			location: sources[i].id,
-			assignedTo: null
+			assignedTo: []
 		});
 	}
 	

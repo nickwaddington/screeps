@@ -15,19 +15,24 @@ module.exports = function() {
 		}
 	}
 	
+	var spawn = this.find(FIND_MY_SPAWNS)[0];
+	
 	if(index !== -1) {
-		var status = this.spawn(jobs[index]);
+		var status = spawn.createCreep([WORK,CARRY,MOVE], null, {
+	    	action: 0
+	    });
 		
 		if(typeof status === 'string') {
-			//assign job to creep
-			Memory.jobs[index].assignedTo = status;
+			Memory.jobs.push({
+				type: 4,
+				priority: 0,
+				start: 0,
+				finish: 0, //sources[i].ticksToRegeneration + Game.time
+				amount: spawn.energyCapacity - spawn.energy,
+				location: sources[i].id,
+				assignedTo: []
+			})
 		}
 	}
-	
-	var src = this.find(FIND_SOURCES)[0];
-	
-	var adj = this.findAdjacent(src.pos);
-	
-	console.log(JSON.stringify(adj));
 	
 };
