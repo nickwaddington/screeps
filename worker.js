@@ -5,7 +5,7 @@ module.exports = function() {
         	this.claimJob();
             break;
         case 1: //Move to job
-        	if(false) {
+        	if(this.pos.isNearTo(Game.getObjectById(this.memory.target))) {
         	    this.memory.action = this.memory.job;
         	}
             break;
