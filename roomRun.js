@@ -19,7 +19,8 @@ module.exports = function() {
 	
 	if(index !== -1) {
 		var status = spawn.createCreep([WORK,CARRY,MOVE], null, {
-	    	action: 0
+	    	action: 0,
+	    	role: 'worker'
 	    });
 		
 		if(typeof status === 'string') {
