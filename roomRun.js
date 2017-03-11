@@ -24,15 +24,24 @@ module.exports = function() {
 	    });
 		
 		if(typeof status === 'string') {
-			Memory.jobs.push({
-				type: 4,
-				priority: 0,
-				start: 0,
-				finish: 0, //sources[i].ticksToRegeneration + Game.time
-				amount: 300, //TODO make dynamic
-				location: spawn.id,
-				assignedTo: []
-			})
+			var existingJob = _.find(Memory.jobs, function(o) {
+				o.location === spawn.id;
+			});
+			
+			if(!existingJob) {
+				Memory.jobs.push({
+					type: 4,
+					priority: 0,
+					start: 0,
+					finish: 0, //sources[i].ticksToRegeneration + Game.time
+					amount: 300, //TODO make dynamic
+					location: spawn.id,
+					assignedTo: []
+				});
+			}
+			else {
+				existingJob.amount = SPAWN_ENERGY_CAPACITY - spawn.energy;
+			}
 		}
 	}
 	

@@ -5,7 +5,10 @@ module.exports = function() {
 				Memory.jobs[i].assignedTo.splice(j,1);
 				
 				if(Memory.jobs[i].type === 4) {
-					console.log(Game.getObjectById(Memory.jobs[i].location).energy)
+					Memory.jobs[i].amount = SPAWN_ENERGY_CAPACITY - Game.getObjectById(Memory.jobs[i].location).energy;
+					if(Memory.jobs[i].amount === 0) {
+						Memory.jobs.splice(i,1);
+					}
 				}
 			}
 		}
