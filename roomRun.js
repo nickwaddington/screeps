@@ -29,7 +29,7 @@ module.exports = function() {
 				priority: 0,
 				start: 0,
 				finish: 0, //sources[i].ticksToRegeneration + Game.time
-				amount: spawn.energyCapacity - spawn.energy,
+				amount: 300, //TODO make dynamic
 				location: spawn.id,
 				assignedTo: []
 			})

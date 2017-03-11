@@ -1,18 +1,25 @@
 module.exports = function() {
-	var index = -1;
-	var jobs = Memory.jobs;
-	for(var i in jobs) {
-		if(jobs[i].assignedTo.length === 0) {
-			index = i;
-			break;
-		}
+	var jobs;
+	var predicate;
+	
+	
+	if(this.carry[RESOURCE_ENERGY] === 0) {
+		predicate = function(o) {
+			return o.type === 3 && o.assignedTo.length === 0;
+		};
+	}
+	else {
+		predicate = function(o) {
+			return o.type === 4 && o.assignedTo.length === 0;
+		};
 	}
 	
-	if(index !== -1) {
-		var j = jobs[index];
-		this.memory.target = j.location;
-		this.memory.job = j.type;
+	var job = _.find(Memory.jobs, predicate);
+	
+	if(job) {
+		this.memory.target = job.location;
+		this.memory.job = job.type;
 		this.memory.action = 1;
-		Memory.jobs[index].assignedTo.push(this.name);
+		job.assignedTo.push(this.name);
 	}
 };
