@@ -9,7 +9,7 @@ module.exports = function() {
 	var index = -1;
 	
 	for(var i in jobs) {
-		if(!jobs[i].assignedTo) {
+		if(jobs[i].assignedTo.length === 0) {
 			index = i;
 			break;
 		}
