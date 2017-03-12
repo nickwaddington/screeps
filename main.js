@@ -8,7 +8,7 @@ Room.prototype.findAdjacent = require('roomFindAdjacent');
 module.exports.loop = function () {
 	if(typeof Memory.jobs === 'undefined') {
 		Memory.jobs = [];
-		Memory.currentId = 0;
+		Memory.currentId = 1;
 	}
 	
     for(var name in Memory.creeps) {

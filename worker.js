@@ -27,12 +27,12 @@ module.exports = function() {
             break;
         case 3: //Mine
             if(this.carry.energy === this.carryCapacity) {
-                this.unclaimJob();
+                jobManager.unclaimJob(this.name);
             }
             break;
         case 4: //Transfer to home
             if(this.carry.energy === 0) {
-                this.unclaimJob();
+                jobManager.unclaimJob(this.name);
             }
             break;
         default:
