@@ -34,14 +34,15 @@ module.exports = function() {
             if(this.carry.energy === 0) {
             	var currentEnergy = SPAWN_ENERGY_CAPACITY - Game.getObjectById(this.memory.target).energy;
             	console.log(currentEnergy)
+            	var creep = this;
             	if(currentEnergy === 0) {
             		jobManager.removeJob(function(o) {
-            			return o.location === this.memory.target && this.memory.type === 4;
+            			return o.location === creep.memory.target && creep.memory.type === 4;
             		});
             	}
             	else {
             		jobManager.updateJob(currentEnergy, function(o) {
-            			return o.location === this.memory.target && this.memory.type === 4;
+            			return o.location === creep.memory.target && creep.memory.type === 4;
             		});
             	}
                 jobManager.unclaimJob(this.name);
