@@ -14,7 +14,7 @@ module.exports = {
 		Memory.currentId++;
 		
 		Memory.jobs.sort(function(a,b) {
-			return b-a;
+			return b.priority - a.priority;
 		});
 		
 		return Memory.currentId - 1;
