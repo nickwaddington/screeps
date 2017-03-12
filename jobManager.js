@@ -40,7 +40,7 @@ module.exports = {
 	unclaimJob: function(creepName) {
 		var jobId = Game.creeps[creepName].memory.job;
 		
-		job = _.find(Memory.jobs, function(o) {
+		var job = _.find(Memory.jobs, function(o) {
 			return o.id === jobId;
 		});
 		
