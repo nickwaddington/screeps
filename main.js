@@ -1,12 +1,7 @@
 Creep.prototype.run = require('creepRun');
-Creep.prototype.harvester = require('harvester');
-Creep.prototype.containerHarvester = require('containerHarvester');
 Creep.prototype.worker = require('worker');
-Creep.prototype.claimJob = require('creepClaimJob');
-Creep.prototype.unclaimJob = require('creepUnclaimJob');
 
 Room.prototype.run = require('roomRun');
-Room.prototype.spawn = require('roomSpawn');
 Room.prototype.initialise = require('roomInitialise');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
 
