@@ -12,17 +12,21 @@ module.exports = {
 		});
 		
 		Memory.currentId++;
+		
+		return Memory.currentId - 1;
 	},
-	removeJob: function(id) {
-		_.remove(Memory.jobs, function(o) {
-			return o.id	=== id;
-		});
+	removeJob: function(predicate) {
+		_.remove(Memory.jobs, predicate);
 	},
-	updateJob: function(id, amount) {
-		var job = _.find(Memory.jobs, function(o) {
-			return o.id	=== id;
-		});
-		job.amount = amount;
+	updateJob: function(amount, predicate) {
+		var job = _.find(Memory.jobs, predicate);
+		if(job) {
+			job.amount = amount;
+			return true;
+		}
+		else {
+			return false;
+		}
 	},
 	claimJob: function(creepName, predicate) {
 		var job = _.find(Memory.jobs, predicate);
