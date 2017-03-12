@@ -22,7 +22,7 @@ module.exports = function() {
             break;
         case 1: //Move to job
         	if(this.pos.isNearTo(Game.getObjectById(this.memory.target))) {
-        	    this.memory.action = this.memory.job;
+        	    this.memory.action = this.memory.type;
         	}
             break;
         case 3: //Mine

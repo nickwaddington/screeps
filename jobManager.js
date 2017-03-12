@@ -27,9 +27,14 @@ module.exports = {
 	claimJob: function(creepName, predicate) {
 		var job = _.find(Memory.jobs, predicate);
 		
-		job.assignedTo.push(creepName);
-		Game.creeps[creepName].memory.job = job.id;
-		Game.creeps[creepName].memory.type = job.type;
+		if(job) {
+			job.assignedTo.push(creepName);
+			Game.creeps[creepName].memory.job = job.id;
+			Game.creeps[creepName].memory.type = job.type;
+			Game.creeps[creepName].memory.location = job.location;
+			Game.creeps[creepName].memory.action = 1;
+		}
+		
 	},
 	unclaimJob: function(creepName) {
 		
