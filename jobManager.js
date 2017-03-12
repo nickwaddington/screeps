@@ -35,7 +35,6 @@ module.exports = {
 			job.assignedTo.push(creepName);
 			Game.creeps[creepName].memory.job = job.id;
 			Game.creeps[creepName].memory.type = job.type;
-			Game.creeps[creepName].memory.location = job.location;
 			Game.creeps[creepName].memory.action = 1;
 			Game.creeps[creepName].memory.target = job.location;
 		}

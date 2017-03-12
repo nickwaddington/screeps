@@ -33,6 +33,7 @@ module.exports = function() {
         case 4: //Transfer to home
             if(this.carry.energy === 0) {
             	var currentEnergy = SPAWN_ENERGY_CAPACITY - Game.getObjectById(this.memory.target).energy;
+            	console.log(currentEnergy)
             	if(currentEnergy === 0) {
             		jobManager.removeJob(function(o) {
             			return o.location === this.memory.target && this.memory.type === 4;
