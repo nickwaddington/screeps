@@ -51,6 +51,13 @@ module.exports = function() {
                 }
             }
             break;
+        case 7: //Upgrade controller
+            if(this.carry.energy === 0) {
+                if(jobManager.unclaimJob(this.name)) {
+                	this.worker();
+                }
+            }
+            break;
         default:
             console.log('Error: ' + this.memory.action + ' is not a valid action');
     }

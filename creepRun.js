@@ -28,6 +28,9 @@ module.exports = function() {
 		case 6: //Repair
 			status = this.repair(Game.getObjectById(this.memory.target));
 			break;
+		case 7: //Upgrade Controller
+			status = this.upgradeController(Game.getObjectById(this.memory.target));
+			break;
         default:
             console.log('Error: ' + this.memory.action + ' is not a valid action');
     }

@@ -8,4 +8,6 @@ module.exports = function() {
 	for(var i in sources) {
 		jobManager.addJob(3, 0, 0, 0, sources[i].energy, sources[i].id);
 	}
+	
+	jobManager.addJob(7, 0, 0, 0, 0, this.controller.id);
 };
