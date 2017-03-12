@@ -13,6 +13,10 @@ module.exports = {
 		
 		Memory.currentId++;
 		
+		Memory.jobs.sort(function(a,b) {
+			return b-a;
+		});
+		
 		return Memory.currentId - 1;
 	},
 	removeJob: function(predicate) {

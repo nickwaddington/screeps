@@ -23,7 +23,7 @@ module.exports = function() {
 			if(!jobManager.updateJob(SPAWN_ENERGY_CAPACITY - spawn.energy, function(o) {
 				return o.location === spawn.id && o.type === 4;
 			})) {
-				jobManager.addJob(4, 0, 0, 0, SPAWN_ENERGY_CAPACITY - spawn.energy, spawn.id);
+				jobManager.addJob(4, 3, 0, 0, SPAWN_ENERGY_CAPACITY - spawn.energy, spawn.id);
 			}
 		}
 	}
