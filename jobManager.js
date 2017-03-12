@@ -53,9 +53,12 @@ module.exports = {
 					job.assignedTo.splice(i,1);
 				}
 			}
+			Game.creeps[creepName].memory.job = 0;
+			Game.creeps[creepName].memory.action = 0;
+			return true;
 		}
-		
-		Game.creeps[creepName].memory.job = 0;
-		Game.creeps[creepName].memory.action = 0;
+		else {
+			return false;
+		}
 	}
 };

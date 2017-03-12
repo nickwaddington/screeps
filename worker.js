@@ -27,13 +27,14 @@ module.exports = function() {
             break;
         case 3: //Mine
             if(this.carry.energy === this.carryCapacity) {
-                jobManager.unclaimJob(this.name);
+                if(jobManager.unclaimJob(this.name)) {
+                	this.worker();
+                }
             }
             break;
         case 4: //Transfer to home
             if(this.carry.energy === 0) {
             	var currentEnergy = SPAWN_ENERGY_CAPACITY - Game.getObjectById(this.memory.target).energy;
-            	console.log(currentEnergy)
             	var creep = this;
             	if(currentEnergy === 0) {
             		jobManager.removeJob(function(o) {
@@ -45,7 +46,9 @@ module.exports = function() {
             			return o.location === creep.memory.target && creep.memory.type === 4;
             		});
             	}
-                jobManager.unclaimJob(this.name);
+                if(jobManager.unclaimJob(this.name)) {
+                	this.worker();
+                }
             }
             break;
         default:
