@@ -13,7 +13,7 @@ module.exports = function() {
 			}
 			else {
 				predicate = function(o) {
-					return o.type === 4 && o.assignedTo.length === 0;
+					return o.type === 4;
 				};
 			}
         	
