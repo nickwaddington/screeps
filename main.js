@@ -11,6 +11,11 @@ Room.prototype.initialise = require('roomInitialise');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
 
 module.exports.loop = function () {
+	if(typeof Memory.jobs === 'undefined') {
+		Memory.jobs = [];
+		Memory.currentId = 0;
+	}
+	
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
