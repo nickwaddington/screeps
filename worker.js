@@ -8,7 +8,7 @@ module.exports = function() {
         	
         	if(this.carry[RESOURCE_ENERGY] === 0) {
 				predicate = function(o) {
-					return o.type === 3 && o.assignedTo.length === 0;
+					return o.type === 3 && o.assignedTo.length < 2;
 				};
 			}
 			else {
