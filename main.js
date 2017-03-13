@@ -1,25 +1,18 @@
 Creep.prototype.run = require('creepRun');
-Creep.prototype.worker = require('worker');
 
 Room.prototype.run = require('roomRun');
 Room.prototype.initialise = require('roomInitialise');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
 
 module.exports.loop = function () {
-	if(typeof Memory.jobs === 'undefined') {
-		Memory.jobs = [];
-		Memory.currentId = 1;
+	if(typeof Memory.calendar === 'undefined') {
+		Memory.calendar = [];
 	}
 	
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
             
-            for(var i in Memory.jobs) {
-            	if(Memory.jobs[i].assignedTo === name) {
-            		Memory.jobs[i].assignedTo = null;
-            	}
-            }
         }
     }
     
