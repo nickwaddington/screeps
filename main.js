@@ -1,6 +1,5 @@
 Creep.prototype.run = require('creepRun');
 
-Room.prototype.initialise = require('roomInitialise');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
 
 var calendar = require('calendarManager');
