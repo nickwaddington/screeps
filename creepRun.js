@@ -24,7 +24,7 @@ module.exports = function() {
 			status = this.upgradeController(Game.getObjectById(this.memory.data));
 			break;
         default:
-            console.log('Error: ' + this.memory.action + ' is not a valid action');
+            console.log('Error for creep ' + this.name + ': ' + this.memory.action + ' is not a valid action');
     }
     
     this.say(this.memory.action + ', ' + status);
