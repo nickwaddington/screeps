@@ -1,12 +1,14 @@
 Creep.prototype.run = require('creepRun');
 
-Room.prototype.run = require('roomRun');
 Room.prototype.initialise = require('roomInitialise');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
+
+var calendar = require('calendarManager');
 
 module.exports.loop = function () {
 	if(typeof Memory.calendar === 'undefined') {
 		Memory.calendar = [];
+		calendar.add('spawn', Game.time, 'Spawn1', 0, [WORK, MOVE, CARRY]);
 	}
 	
     for(var name in Memory.creeps) {
@@ -18,8 +20,10 @@ module.exports.loop = function () {
     
     for(var currentRoom in Game.rooms) {
         var rm = Game.rooms[currentRoom];
-        rm.run();
+        
     }
+    
+    calendar.runCurrentTick();
     
     for(var currentCreep in Game.creeps) {
         var crp = Game.creeps[currentCreep];
