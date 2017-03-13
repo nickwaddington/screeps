@@ -6,7 +6,8 @@ module.exports = function() {
             status = 'idle';
             break;
         case 1: //Move to target
-        	status = this.moveByPath(this.memory.data);
+        	//status = this.moveByPath(this.memory.data);
+        	status = this.move(TOP);
             break;
         case 3: //Mine
             status = this.harvest(Game.getObjectById(this.memory.data));

@@ -37,7 +37,7 @@ module.exports = {
 					var name = spwn.createCreep(a.data);
 					
 					if(typeof name === 'string') {
-						this.add('creep', Game.time + 3*a.data.length - 1, name, 0, null);
+						this.add('creep', Game.time + 3*a.data.length, name, 1, null);
 					}
 					else {
 						//Need to try again later if spawn failed
