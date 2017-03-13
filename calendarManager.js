@@ -11,7 +11,7 @@ module.exports = {
 	runCurrentTick: function() {
 		var indices = [];
 		for(var i in Memory.calendar) {
-			if(Memory.calendar.tick === Game.time) {
+			if(Memory.calendar[i].tick === Game.time) {
 				indices.push(i);
 			}
 		}
