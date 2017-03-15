@@ -1,0 +1,43 @@
+module.exports = {
+	getPathTime: function(rm, body, path, load, fatigue) {
+		if(typeof load === 'undefined') {
+			load = 0;
+		}
+		if(typeof fatigue === 'undefined') {
+			fatigue = 0;
+		}
+		
+		var numMove = 0;
+		var numCarry = 0;
+		var numActiveCarry = Math.ceil(load/50);
+		
+		for(var i = 0; i < body.length; i++) {
+			if(body[i] === MOVE) {
+				numMove++;
+			}
+			else if(body[i] === CARRY) {
+				numCarry++;
+			}
+		}
+		
+		var weight = body.length - numMove - numCarry + numActiveCarry;
+		
+		var time = Math.ceil(fatigue / numMove); //Start time at time it will take for fatigue to reach 0
+		for(var p = 0; p < path.length; p++) {
+			var terrain = rm.lookForAt(LOOK_TERRAIN, path[p].x, path[p].y);
+			
+			if(false) { //road TODO
+				time += Math.ceil(weight / numMove);
+			}
+			else if(terrain === 'swamp') {
+				time += Math.ceil(10 * weight / numMove);
+			}
+			else { //plain
+				time += Math.ceil(2 * weight / numMove);
+			}
+			
+		}
+		
+		return time;
+	}
+};

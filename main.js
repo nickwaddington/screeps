@@ -3,12 +3,17 @@ Creep.prototype.run = require('creepRun');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
 
 var calendar = require('calendarManager');
+var pathUtilities = require('pathUtilites');
 
 module.exports.loop = function () {
-	if(typeof Memory.calendar === 'undefined') {
+	/*if(typeof Memory.calendar === 'undefined') {
 		Memory.calendar = [];
-		calendar.add('spawn', Game.time, 'Spawn1', 0, [WORK, MOVE, CARRY]);
-	}
+		Memory.states = [];
+		Memory.energy = [];
+		Memory.info = [];
+		
+		//calendar.add('spawn', Game.time, 'Spawn1', 0, [WORK, MOVE, CARRY]);
+	}*/
 	
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -17,12 +22,17 @@ module.exports.loop = function () {
         }
     }
     
-    for(var currentRoom in Game.rooms) {
-        var rm = Game.rooms[currentRoom];
-        
-    }
+    var rm = Game.rooms['sim'];
+    var pos1 = rm.getPositionAt(20,20);
+    var pos2 = rm.getPositionAt(20,30);
     
-    calendar.runCurrentTick();
+    var path = rm.findPath(pos1,pos2);
+    
+    var time = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], path);
+    
+    console.log(time);
+    
+    //calendar.runCurrentTick();
     
     for(var currentCreep in Game.creeps) {
         var crp = Game.creeps[currentCreep];
