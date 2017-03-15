@@ -24,7 +24,7 @@ module.exports = {
 		
 		var time = Math.ceil(fatigue / numMove); //Start time at time it will take for fatigue to reach 0
 		for(var p = 0; p < path.length; p++) {
-			var terrain = rm.lookForAt(LOOK_TERRAIN, path[p].x, path[p].y);
+			var terrain = rm.lookForAt(LOOK_TERRAIN, path[p].x, path[p].y)[0];
 			
 			if(false) { //road TODO
 				time += Math.ceil((weight / 2) / numMove);

@@ -23,8 +23,8 @@ module.exports.loop = function () {
     }
     
     var rm = Game.rooms['sim'];
-    var pos1 = rm.getPositionAt(20,20);
-    var pos2 = rm.getPositionAt(20,30);
+    var pos1 = rm.getPositionAt(30,38);
+    var pos2 = rm.getPositionAt(40,38);
     
     var path = rm.findPath(pos1,pos2);
     
