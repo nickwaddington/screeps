@@ -3,7 +3,7 @@ Creep.prototype.run = require('creepRun');
 Room.prototype.findAdjacent = require('roomFindAdjacent');
 
 var calendar = require('calendarManager');
-var pathUtilities = require('pathUtilites');
+var pathUtilities = require('pathUtilities');
 
 module.exports.loop = function () {
 	/*if(typeof Memory.calendar === 'undefined') {
