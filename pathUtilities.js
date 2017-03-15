@@ -27,13 +27,13 @@ module.exports = {
 			var terrain = rm.lookForAt(LOOK_TERRAIN, path[p].x, path[p].y);
 			
 			if(false) { //road TODO
-				time += Math.ceil(weight / numMove);
+				time += Math.ceil((weight / 2) / numMove);
 			}
 			else if(terrain === 'swamp') {
-				time += Math.ceil(10 * weight / numMove);
+				time += Math.ceil(5 * weight / numMove);
 			}
 			else { //plain
-				time += Math.ceil(2 * weight / numMove);
+				time += Math.ceil(1 * weight / numMove);
 			}
 			
 		}
