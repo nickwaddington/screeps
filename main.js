@@ -23,8 +23,11 @@ module.exports.loop = function () {
     }
     
     var rm = Game.rooms['sim'];
-    var pos1 = rm.getPositionAt(30,38);
-    var pos2 = rm.getPositionAt(40,38);
+    var spawn = rm.find(FIND_MY_SPAWNS)[0];
+    var source = rm.find(FIND_SOURCES)[0];
+    
+    var pos1 = rm.getPositionAt(spawn.pos.x, spawn.pos.y - 1);
+    var pos2 = rm.findAdjacent(source.pos);
     
     var path = rm.findPath(pos1,pos2);
     
