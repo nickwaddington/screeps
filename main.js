@@ -33,7 +33,11 @@ module.exports.loop = function () {
     
     var time = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], path);
     
-    console.log(time);
+    var returnPath = rm.findPath(pos2,pos1);
+    
+    var returnTime = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], returnPath, 50);
+    
+    console.log(time, returnTime);
     
     //calendar.runCurrentTick();
     
