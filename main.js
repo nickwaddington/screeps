@@ -6,14 +6,14 @@ var calendar = require('calendarManager');
 var pathUtilities = require('pathUtilities');
 
 module.exports.loop = function () {
-	/*if(typeof Memory.calendar === 'undefined') {
+	if(typeof Memory.calendar === 'undefined') {
 		Memory.calendar = [];
 		Memory.states = [];
 		Memory.energy = [];
 		Memory.info = [];
 		
-		//calendar.add('spawn', Game.time, 'Spawn1', 0, [WORK, MOVE, CARRY]);
-	}*/
+		calendar.add('spawn', Game.time, 'Spawn1', 0, [WORK, MOVE, CARRY]);
+	}
 	
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -22,24 +22,10 @@ module.exports.loop = function () {
         }
     }
     
-    var rm = Game.rooms['sim'];
-    var spawn = rm.find(FIND_MY_SPAWNS)[0];
-    var source = rm.find(FIND_SOURCES)[0];
+    //var rm = Game.rooms['sim'];
+    //var spawn = rm.find(FIND_MY_SPAWNS)[0];
     
-    var pos1 = rm.getPositionAt(spawn.pos.x, spawn.pos.y - 1);
-    var pos2 = rm.findAdjacent(source.pos);
-    
-    var path = rm.findPath(pos1,pos2);
-    
-    var time = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], path);
-    
-    var returnPath = rm.findPath(pos2,pos1);
-    
-    var returnTime = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], returnPath, 50);
-    
-    console.log(time, returnTime);
-    
-    //calendar.runCurrentTick();
+    calendar.runCurrentTick();
     
     for(var currentCreep in Game.creeps) {
         var crp = Game.creeps[currentCreep];

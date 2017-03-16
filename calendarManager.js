@@ -32,12 +32,36 @@ module.exports = {
 					};
 					break;
 				case 'spawn':
-					var spwn = Game.spawns[a.id];
+					var spawn = Game.spawns[a.id];
+					var rm = spawn.room;
 					
-					var name = spwn.createCreep(a.data);
+					var name = spawn.createCreep(a.data);
 					
+					var source = rm.find(FIND_SOURCES)[0];
+				    var pos1 = rm.getPositionAt(spawn.pos.x, spawn.pos.y - 1);
+				    var pos2 = rm.findAdjacent(source.pos);
+				    
+				    var path = rm.findPath(pos1,pos2);
+				    var returnPath = rm.findPath(pos2,pos1);
+				    
+				    var thereTime = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], path);
+				    var returnTime = pathUtilities.getPathTime(rm, [WORK, CARRY, MOVE], returnPath, 50);
+				    
 					if(typeof name === 'string') {
-						this.add('creep', Game.time + 3*a.data.length, name, 1, null);
+						var time = Game.time + 3*a.data.length;
+						this.add('creep', time, name, 1, path);
+						
+						time += thereTime;
+						this.add('creep', time, name, 3, source.id);
+						
+						time += 25;
+						this.add('creep', time, name, 1, returnPath);
+						
+						time += returnTime;
+						this.add('creep', time, name, 4, spawn.id);
+						
+						time++;
+						this.add('creep', time, name, 1, path);
 					}
 					else {
 						//Need to try again later if spawn failed
