@@ -19,8 +19,8 @@ module.exports.loop = function () {
     new RoomVisual(rm.name).rect(src1.pos.x - 1, src1.pos.y - 1, 2, 2);
     new RoomVisual(rm.name).rect(src2.pos.x - 1, src2.pos.y - 1, 2, 2);
     
-    var src1spots = pathUtilities.findAdjacent(src1.pos);
-    var src2spots = pathUtilities.findAdjacent(src2.pos);
+    var src1spots = pathUtilities.findAdjacent(rm, src1.pos);
+    var src2spots = pathUtilities.findAdjacent(rm, src2.pos);
     
     new RoomVisual(rm.name).poly(src1spots, {stroke: '#0000ff', lineStyle: 'dotted'});
     new RoomVisual(rm.name).poly(src2spots, {stroke: '#0000ff', lineStyle: 'dotted'});
