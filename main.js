@@ -21,5 +21,5 @@ module.exports.loop = function () {
     }
     
     //print time and cpu usage
-    console.log("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU used");
+    new RoomVisual('sim').text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU used",1,1);
 };
