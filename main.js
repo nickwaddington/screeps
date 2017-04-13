@@ -11,7 +11,7 @@ module.exports.loop = function () {
     
     var rm = Game.rooms['sim'];
     var spawn = rm.find(FIND_MY_SPAWNS)[0];
-    var rv = new RoomVisual(rm.name)
+    var rv = new RoomVisual(rm.name);
     var sources = rm.find(FIND_SOURCES_ACTIVE);
     var src1 = sources[0];
     var src2 = sources[3];
@@ -19,13 +19,15 @@ module.exports.loop = function () {
     rv.rect(src1.pos.x - 1, src1.pos.y - 1, 2, 2);
     rv.rect(src2.pos.x - 1, src2.pos.y - 1, 2, 2);
     
-    var plotPoints = []
+    var plotPoints = [];
     
     plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src1.pos));
     plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src2.pos));
     
+    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, spawn.pos));
+    
     for(var i in plotPoints) {
-    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'})
+    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
     }
     
     for(var currentCreep in Game.creeps) {
