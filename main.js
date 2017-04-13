@@ -15,10 +15,10 @@ module.exports.loop = function () {
     
     var sources = rm.find(FIND_SOURCES_ACTIVE);
     var src1 = sources[0];
-    var src2 = sources[1];
+    var src2 = sources[2];
     
-    new RoomVisual(rm.name).rect(src1.pos.x - 1, src1.pos.y - 1, 3, 3);
-    new RoomVisual(rm.name).rect(src2.pos.x - 1, src2.pos.y - 1, 3, 3);
+    new RoomVisual(rm.name).rect(src1.pos.x - 1, src1.pos.y - 1, 2, 2);
+    new RoomVisual(rm.name).rect(src2.pos.x - 1, src2.pos.y - 1, 2, 2);
     
     for(var currentCreep in Game.creeps) {
         var crp = Game.creeps[currentCreep];
