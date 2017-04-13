@@ -28,9 +28,6 @@ module.exports.loop = function () {
     	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue'})
     }
     
-    rv.poly(src1spots, {stroke: '#0000ff', lineStyle: 'dotted'});
-    rv.poly(src2spots, {stroke: '#0000ff', lineStyle: 'dotted'});
-    
     for(var currentCreep in Game.creeps) {
         var crp = Game.creeps[currentCreep];
         
