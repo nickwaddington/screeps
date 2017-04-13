@@ -48,8 +48,8 @@ module.exports = {
 		});
 		
 		var arr = [];
-		for(var pt in filtered) {
-			arr.push(rm.getPositionAt(pt.x, pt.y));
+		for(var i in filtered) {
+			arr.push(rm.getPositionAt(filtered[i].x, filtered[i].y));
 		}
 		
 		return arr;
