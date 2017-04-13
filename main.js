@@ -21,8 +21,8 @@ module.exports.loop = function () {
     
     var plotPoints = []
     
-    plotPoints.push(pathUtilities.findAdjacent(rm, src1.pos));
-    plotPoints.push(pathUtilities.findAdjacent(rm, src2.pos));
+    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src1.pos));
+    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src2.pos));
     
     for(var i in plotPoints) {
     	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue'})
