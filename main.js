@@ -13,20 +13,20 @@ module.exports.loop = function () {
     var spawn = rm.find(FIND_MY_SPAWNS)[0];
     var rv = new RoomVisual(rm.name);
     var sources = rm.find(FIND_SOURCES_ACTIVE);
-    var src1 = sources[0];
-    var src2 = sources[3];
     
-    rv.rect(src1.pos.x - 1, src1.pos.y - 1, 2, 2);
-    rv.rect(src2.pos.x - 1, src2.pos.y - 1, 2, 2);
-    
+    var nums = [0,3];
     var plotPoints = [];
     
-    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src1.pos));
-    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src2.pos));
+    for(var i in nums) {
+    	var src = sources[nums[i]];
+    	
+    	rv.rect(src.pos.x - 1, src.pos.y - 1, 2, 2);
+    	plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src.pos, 1));
+    }
     
-    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, spawn.pos));
+    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, spawn.pos, 1));
     
-    for(var i in plotPoints) {
+    for(i in plotPoints) {
     	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
     }
     
@@ -36,5 +36,5 @@ module.exports.loop = function () {
     }
     
     
-    rv.text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU used",2,2);
+    rv.text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU used",5,2);
 };

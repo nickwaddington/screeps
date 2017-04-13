@@ -40,8 +40,8 @@ module.exports = {
 		
 		return time;
 	},
-	findAdjacent: function(rm, p) {
-		var positions = rm.lookForAtArea(LOOK_TERRAIN, p.y-1, p.x-1, p.y+1, p.x+1, true);
+	findAdjacent: function(rm, p, range) {
+		var positions = rm.lookForAtArea(LOOK_TERRAIN, p.y-range, p.x-range, p.y+range, p.x+range, true);
 		
 		var filtered = _.filter(positions, function(o) {
 			return o.terrain !== 'wall';
