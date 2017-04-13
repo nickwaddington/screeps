@@ -25,7 +25,7 @@ module.exports.loop = function () {
     plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src2.pos));
     
     for(var i in plotPoints) {
-    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', opacity: 0})
+    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', opacity: 1})
     }
     
     for(var currentCreep in Game.creeps) {
