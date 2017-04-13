@@ -39,5 +39,19 @@ module.exports = {
 		}
 		
 		return time;
+	},
+	findAdjacent: function(p) {
+		var positions = this.lookForAtArea(LOOK_TERRAIN, p.y-1, p.x-1, p.y+1, p.x+1, true);
+		
+		var filtered = _.filter(positions, function(o) {
+			return o.terrain !== 'wall';
+		});
+		
+		var arr = [];
+		for(var pt in filtered) {
+			arr.push(this.getPositionAt(pt.x, pt.y));
+		}
+		
+		return arr;
 	}
 };
