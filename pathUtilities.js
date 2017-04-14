@@ -127,7 +127,7 @@ module.exports = {
 		
 	    var sources = rm.find(FIND_SOURCES_ACTIVE);
 	    
-	    var nums = [2,3];
+	    var nums = [1,3];
 	    var plotPoints = [];
 	    
 	    plotPoints = plotPoints.concat(this.findAdjacent(rm, spawn.pos, 1));
