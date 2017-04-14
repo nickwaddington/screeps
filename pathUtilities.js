@@ -69,8 +69,8 @@ module.exports = {
 		Graph.prototype.addEdge = function(vertex1, vertex2) {
 			var v1 = Game.getObjectById(vertex1).pos;
 			var v2 = Game.getObjectById(vertex2).pos;
-			var pt1 = v2.findClosestByRange(parent.findAdjacent(rm, v1, 1));
-			var pt2 = v1.findClosestByRange(parent.findAdjacent(rm, v2, 1));
+			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, 1));
+			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, 1));
 			
 			var ret = PathFinder.search(pt1, pt2);
 			
