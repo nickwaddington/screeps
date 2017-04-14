@@ -61,12 +61,16 @@ module.exports = {
 			rm.memory.vertices = [];
 			rm.memory.edges = [];
 			rm.memory.numberOfEdges = 0;
+			var temp = new PathFinder.CostMatrix();
+			rm.memory.costMatrix = temp.serialize();
 		}
 		Graph.prototype.addVertex = function(vertex, r) {
 			rm.memory.vertices.push({vertex: vertex, range: r});
 			rm.memory.edges[vertex] = [];
 		};
 		Graph.prototype.addEdge = function(vertex1, vertex2) {
+			var cm = PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
+			
 			var v1 = Game.getObjectById(vertex1).pos;
 			var v2 = Game.getObjectById(vertex2).pos;
 			
@@ -87,13 +91,23 @@ module.exports = {
 			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, v1range));
 			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, v2range));
 			
-			var ret = PathFinder.search(pt1, pt2);
+			var ret = PathFinder.search(pt1, pt2, {
+				roomCallback: function(rm) {
+					return PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
+				}
+			});
 			
 			var p = ret.path;
 			var temp = p;
 			p.pop();
 			var revP = temp.reverse();
 			revP.push(pt1);
+			
+			//Make existing path more expensive in cost matrix so paths try to avoid overlapping
+			for(i in p) {
+				cm.set(p.x, p.y, 6);
+			}
+			cm.set(pt1.x, pt1.y, 6);
 			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
