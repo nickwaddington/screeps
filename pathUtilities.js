@@ -115,6 +115,8 @@ module.exports = {
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
 			rm.memory.numberOfEdges++;
+			
+			console.log(JSON.stringify(rm.memory.edges));
 		};
 		
 		
@@ -183,8 +185,6 @@ module.exports = {
 	    for(var e in rm.memory.extensionPositions) {
 	    	rv.circle(rm.memory.extensionPositions[e], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
 	    }
-	    
-	    console.log(rm.memory.extensionPositions.length)
 	    
 	    rm.memory.costMatrix = cm.serialize();
 			
