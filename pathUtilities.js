@@ -106,10 +106,10 @@ module.exports = {
 			revP.push(pt1);
 			
 			//Make existing path more expensive in cost matrix so paths try to avoid overlapping
-			/*for(i in p) {
-				cm.set(p[i].x, p[i].y, 2);
+			for(i in p) {
+				cm.set(p[i].x, p[i].y, 1);
 			}
-			cm.set(pt1.x, pt1.y, 2);*/
+			cm.set(pt1.x, pt1.y, 1);
 			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
@@ -156,6 +156,31 @@ module.exports = {
 	    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
 	    	
 	    	cm.set(plotPoints[i].x, plotPoints[i].y, 6);
+	    }
+	    
+	    //Get extension positions
+	    var extensionPositions = [];
+	    
+	    for(var j in nums) {
+	    	source = sources[nums[i]];
+	    	
+	    	currentPath = this.getPath(rm, spawn.id, source.id);
+	    	
+	    	for(var c in currentPath) {
+	    		for(var x = -1; x <= 1; x++) {
+	    			for(var y = -1; y <= 1; y++) {
+	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0) {
+	    					if(Game.map.getTerrainAt(currentPath[c].x + x, currentPath[c].y + y, rm.name) !== 'wall') {
+	    						extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+	    
+	    for(var e in extensionPositions) {
+	    	rv.circle(extensionPositions[e], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
 	    }
 	    
 	    rm.memory.costMatrix = cm.serialize();

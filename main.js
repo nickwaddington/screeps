@@ -1,7 +1,6 @@
 var pathUtilities = require('pathUtilities');
 
 module.exports.loop = function () {
-	
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -17,7 +16,6 @@ module.exports.loop = function () {
         var crp = Game.creeps[currentCreep];
         
     }
-    
     
     rv.text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU",5,2);
 };
