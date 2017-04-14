@@ -109,6 +109,8 @@ module.exports = {
 			}
 			cm.set(pt1.x, pt1.y, 6);
 			
+			rm.memory.costMatrix = cm.serialize();
+			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
 			rm.memory.numberOfEdges++;
