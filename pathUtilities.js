@@ -69,14 +69,14 @@ module.exports = {
 	    var nums = [0,3];
 	    var plotPoints = [];
 	    
-	    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, spawn.pos, 1));
-	    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, rm.controller.pos, 3));
+	    plotPoints = plotPoints.concat(this.findAdjacent(rm, spawn.pos, 1));
+	    plotPoints = plotPoints.concat(this.findAdjacent(rm, rm.controller.pos, 3));
 	    
 	    for(var i in nums) {
 	    	var src = sources[nums[i]];
 	    	
 	    	rv.rect(src.pos.x - 1, src.pos.y - 1, 2, 2);
-	    	plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src.pos, 1));
+	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
 	    	addVertex(src.id);
 	    	addEdge(src.id,spawn.id);
