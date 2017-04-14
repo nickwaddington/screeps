@@ -8,8 +8,9 @@ module.exports.loop = function () {
             
         }
     }
-    var rv = new RoomVisual(rm.name);
+    
     var rm = Game.rooms['sim'];
+    var rv = new RoomVisual(rm.name);
     pathUtilities.initialisePaths(rm);
     
     for(var currentCreep in Game.creeps) {
