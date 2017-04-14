@@ -105,9 +105,9 @@ module.exports = {
 			
 			//Make existing path more expensive in cost matrix so paths try to avoid overlapping
 			for(i in p) {
-				cm.set(p[i].x, p[i].y, 6);
+				cm.set(p[i].x, p[i].y, 2);
 			}
-			cm.set(pt1.x, pt1.y, 6);
+			cm.set(pt1.x, pt1.y, 2);
 			
 			rm.memory.costMatrix = cm.serialize();
 			
@@ -138,8 +138,8 @@ module.exports = {
 	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
 	    	graph.addVertex(src.id, 1);
-	    	graph.addEdge(src.id,spawn.id);
 	    	graph.addEdge(src.id,rm.controller.id);
+	    	graph.addEdge(src.id,spawn.id);
 	    	
 	    	var pth = this.getPath(rm, src.id,spawn.id);
 	    	rv.poly(pth);
