@@ -172,6 +172,7 @@ module.exports = {
 	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0) {
 	    					if(Game.map.getTerrainAt(currentPath[c].x + x, currentPath[c].y + y, rm.name) !== 'wall') {
 	    						extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
+	    						cm.set(currentPath[c].x + x, currentPath[c].y + y, 255);
 	    					}
 	    				}
 	    			}
