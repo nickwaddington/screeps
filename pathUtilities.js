@@ -62,13 +62,28 @@ module.exports = {
 			rm.memory.edges = [];
 			rm.memory.numberOfEdges = 0;
 		}
-		Graph.prototype.addVertex = function(vertex) {
-			rm.memory.vertices.push(vertex);
+		Graph.prototype.addVertex = function(vertex, r) {
+			rm.memory.vertices.push({vertex: vertex, range: r});
 			rm.memory.edges[vertex] = [];
 		};
 		Graph.prototype.addEdge = function(vertex1, vertex2) {
 			var v1 = Game.getObjectById(vertex1).pos;
 			var v2 = Game.getObjectById(vertex2).pos;
+			
+			var v1range = 1;
+			var v2range = 1;
+			for(var i in rm.memory.vertices) {
+				var current = rm.memory.vertices[i];
+				
+				if(current.vertex === vertex1) {
+					v1range = current.range;
+				}
+				if(current.vertex === vertex2) {
+					v2range = current.range;
+				}
+			}
+			
+			
 			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, 1));
 			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, 1));
 			
@@ -90,8 +105,8 @@ module.exports = {
 		var rv = new RoomVisual(rm.name);
 		
 		var spawn = rm.find(FIND_MY_SPAWNS)[0];
-		graph.addVertex(spawn.id);
-		graph.addVertex(rm.controller.id);
+		graph.addVertex(spawn.id, 1);
+		graph.addVertex(rm.controller.id, 3);
 		
 	    var sources = rm.find(FIND_SOURCES_ACTIVE);
 	    
@@ -106,7 +121,7 @@ module.exports = {
 	    	
 	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
-	    	graph.addVertex(src.id);
+	    	graph.addVertex(src.id, 1);
 	    	graph.addEdge(src.id,spawn.id);
 	    	graph.addEdge(src.id,rm.controller.id);
 	    	
