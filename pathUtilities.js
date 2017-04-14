@@ -78,9 +78,9 @@ module.exports = {
 	    	rv.rect(src.pos.x - 1, src.pos.y - 1, 2, 2);
 	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
-	    	addVertex(src.id);
-	    	addEdge(src.id,spawn.id);
-	    	addEdge(src.id,rm.controller.id);
+	    	graph.addVertex(src.id);
+	    	graph.addEdge(src.id,spawn.id);
+	    	graph.addEdge(src.id,rm.controller.id);
 	    }
 	    
 	    
