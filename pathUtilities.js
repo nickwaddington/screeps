@@ -56,6 +56,7 @@ module.exports = {
 	},
 	initialisePaths: function(rm) {
 		var parent = this;
+		var cm = PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
 		
 		function Graph() {
 			rm.memory.vertices = [];
@@ -69,8 +70,6 @@ module.exports = {
 			rm.memory.edges[vertex] = [];
 		};
 		Graph.prototype.addEdge = function(vertex1, vertex2) {
-			var cm = PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
-			
 			var v1 = Game.getObjectById(vertex1).pos;
 			var v2 = Game.getObjectById(vertex2).pos;
 			
@@ -93,6 +92,9 @@ module.exports = {
 			
 			var ret = PathFinder.search(pt1, pt2, {
 				roomCallback: function(roomName) {
+					if(roomName === rm.name) {
+						return cm;
+					}
 					return PathFinder.CostMatrix.deserialize(Game.rooms[roomName].memory.costMatrix);
 				}
 			});
@@ -104,12 +106,10 @@ module.exports = {
 			revP.push(pt1);
 			
 			//Make existing path more expensive in cost matrix so paths try to avoid overlapping
-			for(i in p) {
+			/*for(i in p) {
 				cm.set(p[i].x, p[i].y, 2);
 			}
-			cm.set(pt1.x, pt1.y, 2);
-			
-			rm.memory.costMatrix = cm.serialize();
+			cm.set(pt1.x, pt1.y, 2);*/
 			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
@@ -154,7 +154,12 @@ module.exports = {
 	    
 	    for(i in plotPoints) {
 	    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
+	    	
+	    	cm.set(plotPoints[i].x, plotPoints[i].y, 6);
 	    }
+	    
+	    rm.memory.costMatrix = cm.serialize();
+			
 		
 	},
 	getPath: function(rm, a, b) {
