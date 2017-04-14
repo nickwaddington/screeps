@@ -112,6 +112,9 @@ module.exports = {
 	    	
 	    	var pth = this.getPath(rm, src.id,spawn.id);
 	    	rv.poly(pth);
+	    	
+	    	var pth2 = this.getPath(rm, src.id,rm.controller.id);
+	    	rv.poly(pth2);
 	    }
 	    
 	    //var pth = rm.memory.edges[spawn.id][1].path;
