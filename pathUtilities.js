@@ -92,8 +92,8 @@ module.exports = {
 			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, v2range));
 			
 			var ret = PathFinder.search(pt1, pt2, {
-				roomCallback: function(rm) {
-					return PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
+				roomCallback: function(roomName) {
+					return PathFinder.CostMatrix.deserialize(Game.rooms[roomName].memory.costMatrix);
 				}
 			});
 			
