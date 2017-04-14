@@ -84,8 +84,8 @@ module.exports = {
 			}
 			
 			
-			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, 1));
-			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, 1));
+			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, v1range));
+			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, v2range));
 			
 			var ret = PathFinder.search(pt1, pt2);
 			
