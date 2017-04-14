@@ -127,14 +127,13 @@ module.exports = {
 		
 	    var sources = rm.find(FIND_SOURCES_ACTIVE);
 	    
-	    var nums = [1,3];
 	    var plotPoints = [];
 	    
 	    plotPoints = plotPoints.concat(this.findAdjacent(rm, spawn.pos, 1));
 	    plotPoints = plotPoints.concat(this.findAdjacent(rm, rm.controller.pos, 3));
 	    
-	    for(var i in nums) {
-	    	var src = sources[nums[i]];
+	    for(var i in sources) {
+	    	var src = sources[i];
 	    	
 	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
@@ -162,8 +161,8 @@ module.exports = {
 	    //Get extension positions
 	    rm.memory.extensionPositions = [];
 	    
-	    for(var j in nums) {
-	    	var source = sources[nums[j]];
+	    for(var j in sources) {
+	    	var source = sources[j];
 	    	
 	    	var currentPath = this.getPath(rm, spawn.id, source.id);
 	    	
