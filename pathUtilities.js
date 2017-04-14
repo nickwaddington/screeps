@@ -58,43 +58,39 @@ module.exports = {
 	},
 	initialisePaths: function(rm) {
 		var graph = new Graph();
-		graph.addVertex(1);
-		graph.addVertex(2);
-		graph.addVertex(3);
-		graph.addVertex(4);
-		graph.addVertex(5);
-		graph.addVertex(6);
-		graph.print(); // 1 -> | 2 -> | 3 -> | 4 -> | 5 -> | 6 ->
-		graph.addEdge(1, 2);
-		graph.addEdge(1, 5);
-		graph.addEdge(2, 3);
-		graph.addEdge(2, 5);
-		graph.addEdge(3, 4);
-		graph.addEdge(4, 5);
-		graph.addEdge(4, 6);
-		graph.print(); // 1 -> 2, 5 | 2 -> 1, 3, 5 | 3 -> 2, 4 | 4 -> 3, 5, 6 | 5 -> 1, 2, 4 | 6 -> 4
-		console.log('graph size (number of vertices):', graph.size()); // => 6
-		console.log('graph relations (number of edges):', graph.relations()); // => 7
-		graph.traverseDFS(1, function(vertex) { console.log(vertex); }); // => 1 2 3 4 5 6
-		console.log('---');
-		graph.traverseBFS(1, function(vertex) { console.log(vertex); }); // => 1 2 5 3 4 6
-		graph.traverseDFS(0, function(vertex) { console.log(vertex); }); // => 'Vertex not found'
-		graph.traverseBFS(0, function(vertex) { console.log(vertex); }); // => 'Vertex not found'
-		console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-5-1
-		console.log('path from 3 to 5:', graph.pathFromTo(3, 5)); // => 3-2-5
-		graph.removeEdge(1, 2);
-		graph.removeEdge(4, 5);
-		graph.removeEdge(10, 11);
-		console.log('graph relations (number of edges):', graph.relations()); // => 5
-		console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-3-2-5-1
-		graph.addEdge(1, 2);
-		graph.addEdge(4, 5);
-		console.log('graph relations (number of edges):', graph.relations()); // => 7
-		console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-5-1
-		graph.removeVertex(5);
-		console.log('graph size (number of vertices):', graph.size()); // => 5
-		console.log('graph relations (number of edges):', graph.relations()); // => 4
-		console.log('path from 6 to 1:', graph.pathFromTo(6, 1)); // => 6-4-3-2-1
+		var rv = new RoomVisual(rm.name);
+		
+		var spawn = rm.find(FIND_MY_SPAWNS)[0];
+		graph.addVertex(spawn.id);
+		graph.addVertex(rm.controller.id);
+		
+	    var sources = rm.find(FIND_SOURCES_ACTIVE);
+	    
+	    var nums = [0,3];
+	    var plotPoints = [];
+	    
+	    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, spawn.pos, 1));
+	    plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, rm.controller.pos, 3));
+	    
+	    for(var i in nums) {
+	    	var src = sources[nums[i]];
+	    	
+	    	rv.rect(src.pos.x - 1, src.pos.y - 1, 2, 2);
+	    	plotPoints = plotPoints.concat(pathUtilities.findAdjacent(rm, src.pos, 1));
+	    	
+	    	addVertex(src.id);
+	    	addEdge(src.id,spawn.id);
+	    	addEdge(src.id,rm.controller.id);
+	    }
+	    
+	    
+	    for(i in plotPoints) {
+	    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
+	    }
+		
+		
+		graph.print();
+		
 	},
 	getPath: function(rm, a, b) {
 		
