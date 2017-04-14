@@ -108,7 +108,7 @@ module.exports = {
 	    	graph.addEdge(src.id,rm.controller.id);
 	    }
 	    
-	    var pth = rm.memory.edges[spawn.id][0];
+	    var pth = rm.memory.edges[spawn.id][0].path;
 	    console.log(JSON.stringify(pth))
 	    rv.poly(pth)
 	    
