@@ -162,7 +162,7 @@ module.exports = {
 	    var extensionPositions = [];
 	    
 	    for(var j in nums) {
-	    	source = sources[nums[i]];
+	    	var source = sources[nums[i]];
 	    	
 	    	currentPath = this.getPath(rm, spawn.id, source.id);
 	    	
