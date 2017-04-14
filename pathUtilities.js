@@ -1,5 +1,3 @@
-var Graph = require('graph');
-
 module.exports = {
 	getPathTime: function(rm, body, path, load, fatigue) {
 		if(typeof load === 'undefined') {
@@ -57,6 +55,31 @@ module.exports = {
 		return arr;
 	},
 	initialisePaths: function(rm) {
+		function Graph() {
+			rm.memory.vertices = [];
+			rm.memory.edges = [];
+			rm.memory.numberOfEdges = 0;
+		}
+		Graph.prototype.addVertex = function(vertex) {
+			rm.memory.vertices.push(vertex);
+			rm.memory.edges[vertex] = [];
+		};
+		Graph.prototype.addEdge = function(vertex1, vertex2) {
+			var v1 = Game.getObjectById(vertex1).pos;
+			var v2 = Game.getObjectById(vertex2).pos;
+			var pt1 = v2.findClosestByRange(this.findAdjacent(rm, v1, 1));
+			var pt2 = v1.findClosestByRange(this.findAdjacent(rm, v2, 1));
+			
+			ret = PathFinder.search(pt1, pt2);
+			
+			var p = ret.path
+			
+			rm.memory.edges[vertex1].push({vertex: vertex2, path: p});
+			rm.memory.edges[vertex2].push({vertex: vertex1, path: p});
+			rm.memory.numberOfEdges++;
+		};
+		
+		
 		var graph = new Graph();
 		var rv = new RoomVisual(rm.name);
 		
@@ -83,13 +106,13 @@ module.exports = {
 	    	graph.addEdge(src.id,rm.controller.id);
 	    }
 	    
+	    var pth = rm.memory.edges[spawn.id][0];
+	    console.log(JSON.stringify(pth))
+	    rv.poly(pth)
 	    
 	    for(i in plotPoints) {
 	    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
 	    }
-		
-		
-		graph.print();
 		
 	},
 	getPath: function(rm, a, b) {
