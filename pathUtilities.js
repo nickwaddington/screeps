@@ -105,7 +105,7 @@ module.exports = {
 			
 			//Make existing path more expensive in cost matrix so paths try to avoid overlapping
 			for(i in p) {
-				cm.set(p.x, p.y, 6);
+				cm.set(p[i].x, p[i].y, 6);
 			}
 			cm.set(pt1.x, pt1.y, 6);
 			
