@@ -56,7 +56,8 @@ module.exports = {
 	},
 	initialisePaths: function(rm) {
 		var parent = this;
-		var cm = PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
+		//var cm = PathFinder.CostMatrix.deserialize(rm.memory.costMatrix);
+		var cm = new PathFinder.CostMatrix();
 		
 		function Graph() {
 			rm.memory.vertices = [];
@@ -159,7 +160,7 @@ module.exports = {
 	    }
 	    
 	    //Get extension positions
-	    var extensionPositions = [];
+	    rm.memory.extensionPositions = [];
 	    
 	    for(var j in nums) {
 	    	var source = sources[nums[j]];
@@ -171,7 +172,7 @@ module.exports = {
 	    			for(var y = -1; y <= 1; y++) {
 	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0) {
 	    					if(Game.map.getTerrainAt(currentPath[c].x + x, currentPath[c].y + y, rm.name) !== 'wall') {
-	    						extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
+	    						rm.memory.extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
 	    						cm.set(currentPath[c].x + x, currentPath[c].y + y, 255);
 	    					}
 	    				}
@@ -180,9 +181,11 @@ module.exports = {
 	    	}
 	    }
 	    
-	    for(var e in extensionPositions) {
-	    	rv.circle(extensionPositions[e], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
+	    for(var e in rm.memory.extensionPositions) {
+	    	rv.circle(rm.memory.extensionPositions[e], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
 	    }
+	    
+	    console.log(rm.memory.extensionPositions.length)
 	    
 	    rm.memory.costMatrix = cm.serialize();
 			
