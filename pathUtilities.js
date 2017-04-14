@@ -80,8 +80,8 @@ module.exports = {
 			var revP = temp.reverse()
 			revP.push(pt1);
 			
-			rm.memory.edges[vertex1].push({vertex: vertex2, path: p});
-			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP});
+			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
+			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
 			rm.memory.numberOfEdges++;
 		};
 		
@@ -112,8 +112,8 @@ module.exports = {
 	    	graph.addEdge(src.id,rm.controller.id);
 	    }
 	    
-	    var pth = rm.memory.edges[spawn.id][0].path;
-	    console.log(JSON.stringify(pth));
+	    var pth = rm.memory.edges[spawn.id][1].path;
+	    //console.log(JSON.stringify(pth));
 	    rv.poly(pth)
 	    
 	    for(i in plotPoints) {
