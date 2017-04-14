@@ -77,7 +77,7 @@ module.exports = {
 			var p = ret.path;
 			var temp = p;
 			p.pop();
-			var revP = temp.reverse()
+			var revP = temp.reverse();
 			revP.push(pt1);
 			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
@@ -104,17 +104,19 @@ module.exports = {
 	    for(var i in nums) {
 	    	var src = sources[nums[i]];
 	    	
-	    	rv.rect(src.pos.x - 1, src.pos.y - 1, 2, 2);
 	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
 	    	graph.addVertex(src.id);
 	    	graph.addEdge(src.id,spawn.id);
 	    	graph.addEdge(src.id,rm.controller.id);
+	    	
+	    	var pth = this.getPath(rm, src.id,spawn.id);
+	    	rv.poly(pth);
 	    }
 	    
-	    var pth = rm.memory.edges[spawn.id][1].path;
+	    //var pth = rm.memory.edges[spawn.id][1].path;
 	    //console.log(JSON.stringify(pth));
-	    rv.poly(pth)
+	    //rv.poly(pth);
 	    
 	    for(i in plotPoints) {
 	    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
@@ -122,6 +124,13 @@ module.exports = {
 		
 	},
 	getPath: function(rm, a, b) {
-		
+		for(var i in rm.memory.edges[a]) {
+			var current = rm.memory.edges[a][i];
+			
+			if(current.vertex === b) {
+				return current.path;
+			}
+		}
+		return [];
 	}
 };
