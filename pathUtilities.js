@@ -74,7 +74,7 @@ module.exports = {
 			
 			var ret = PathFinder.search(pt1, pt2);
 			
-			var p = ret.path
+			var p = ret.path;
 			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: p});
@@ -109,7 +109,7 @@ module.exports = {
 	    }
 	    
 	    var pth = rm.memory.edges[spawn.id][0].path;
-	    console.log(JSON.stringify(pth))
+	    console.log(JSON.stringify(Room.serializePath(pth)))
 	    rv.poly(pth)
 	    
 	    for(i in plotPoints) {
