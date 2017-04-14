@@ -75,9 +75,13 @@ module.exports = {
 			var ret = PathFinder.search(pt1, pt2);
 			
 			var p = ret.path;
+			var temp = p;
+			p.pop();
+			var revP = temp.reverse()
+			revP.push(pt2);
 			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p});
-			rm.memory.edges[vertex2].push({vertex: vertex1, path: p});
+			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP});
 			rm.memory.numberOfEdges++;
 		};
 		
@@ -109,7 +113,7 @@ module.exports = {
 	    }
 	    
 	    var pth = rm.memory.edges[spawn.id][0].path;
-	    console.log(JSON.stringify(Room.serializePath(pth)))
+	    console.log(JSON.stringify(pth));
 	    rv.poly(pth)
 	    
 	    for(i in plotPoints) {
