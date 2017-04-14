@@ -164,7 +164,7 @@ module.exports = {
 	    for(var j in nums) {
 	    	var source = sources[nums[j]];
 	    	
-	    	currentPath = this.getPath(rm, spawn.id, source.id);
+	    	var currentPath = this.getPath(rm, spawn.id, source.id);
 	    	
 	    	for(var c in currentPath) {
 	    		for(var x = -1; x <= 1; x++) {
