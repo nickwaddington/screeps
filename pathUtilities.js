@@ -223,7 +223,7 @@ module.exports = {
 	    					break;
 	    				}
 	    				
-	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0) {
+	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0 && rm.getPositionAt(cm.get(currentPath[c].x + x, currentPath[c].y + y)) {
 	    					if(Game.map.getTerrainAt(currentPath[c].x + x, currentPath[c].y + y, rm.name) !== 'wall') {
 	    						rm.memory.extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
 	    						cm.set(currentPath[c].x + x, currentPath[c].y + y, 255);
