@@ -108,7 +108,9 @@ module.exports = {
 						return cm;
 					}
 					return PathFinder.CostMatrix.deserialize(Game.rooms[roomName].memory.costMatrix);
-				}
+				},
+				plainCost: 2,
+				swampCost: 10
 			});
 			
 			var p = ret.path;
@@ -117,7 +119,7 @@ module.exports = {
 			var revP = temp.reverse();
 			revP.push(pt1);
 			
-			//Make existing path more expensive in cost matrix so paths try to avoid overlapping
+			//Make existing path cheaper to minimise road requirements
 			for(i in p) {
 				cm.set(p[i].x, p[i].y, 1);
 			}
