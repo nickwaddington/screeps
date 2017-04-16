@@ -152,11 +152,11 @@ module.exports = {
 	    	var exitPositions = rm.find(e);
 	    	
 	    	if(exitPositions.length > 0) {
-	    		var roomName = describeExits(rm.name)[e.toString()];
+	    		/*var roomName = describeExits(rm.name)[e.toString()];
 	    		
 	    		if(!Game.map.isRoomAvailable(roomName)) {
 	    			continue;
-	    		}
+	    		}*/
 	    		
 	    		graph.addVertex(e, 0);
 	    		graph.addEdge(e, spawn.id, exitPositions[0], spawn.pos);
