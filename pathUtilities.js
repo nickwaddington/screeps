@@ -156,12 +156,6 @@ module.exports = {
 	    	graph.addVertex(src.id, 1);
 	    	graph.addEdge(src.id, rm.controller.id, src.pos, rm.controller.pos);
 	    	graph.addEdge(src.id, spawn.id, src.pos, spawn.pos);
-	    	
-	    	var pth = this.getPath(rm, src.id,spawn.id);
-	    	//rv.poly(pth);
-	    	
-	    	var pth2 = this.getPath(rm, src.id,rm.controller.id);
-	    	//rv.poly(pth2);
 	    }
 	    
 	    var exits = [FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT];
@@ -178,12 +172,6 @@ module.exports = {
 	    		graph.addVertex(exits[e], 0);
 	    		graph.addEdge(exits[e], spawn.id, exitPositions[0], spawn.pos);
 	    		graph.addEdge(exits[e], rm.controller.id, exitPositions[0], rm.controller.pos);
-	    		
-	    		var pth3 = this.getPath(rm, exits[e], spawn.id);
-	    		rv.poly(pth3);
-	    		
-	    		var pth4 = this.getPath(rm, exits[e], rm.controller.id);
-	    		rv.poly(pth4);
 	    	}
 	    }
 	    
@@ -225,6 +213,12 @@ module.exports = {
 	    
 	    for(var e in rm.memory.extensionPositions) {
 	    	rv.circle(rm.memory.extensionPositions[e], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
+	    }
+	    
+	    for(var ver1 in rm.memory.edges) {
+	    	for(var ver2 in rm.memory.edges[ver1]) {
+	    		rv.poly(rm.memory.edges[ver1][ver2].path);
+	    	}
 	    }
 	    
 	    rm.memory.costMatrix = cm.serialize();
