@@ -70,10 +70,7 @@ module.exports = {
 			rm.memory.vertices.push({vertex: vertex, range: r});
 			rm.memory.edges[vertex] = [];
 		};
-		Graph.prototype.addEdge = function(vertex1, vertex2) {
-			var v1 = Game.getObjectById(vertex1).pos;
-			var v2 = Game.getObjectById(vertex2).pos;
-			
+		Graph.prototype.addEdge = function(vertex1, vertex2, v1, v2) {
 			var v1range = 1;
 			var v2range = 1;
 			for(var i in rm.memory.vertices) {
@@ -124,6 +121,7 @@ module.exports = {
 		var rv = new RoomVisual(rm.name);
 		
 		var spawn = rm.find(FIND_MY_SPAWNS)[0];
+		cm.set(spawn.pos.x, spawn.pos.y, 255);
 		graph.addVertex(spawn.id, 1);
 		graph.addVertex(rm.controller.id, 3);
 		
@@ -140,14 +138,36 @@ module.exports = {
 	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
 	    	
 	    	graph.addVertex(src.id, 1);
-	    	graph.addEdge(src.id,rm.controller.id);
-	    	graph.addEdge(src.id,spawn.id);
+	    	graph.addEdge(src.id, rm.controller.id, src.pos, rm.controller.pos);
+	    	graph.addEdge(src.id, spawn.id, src.pos, spawn.pos);
 	    	
 	    	var pth = this.getPath(rm, src.id,spawn.id);
-	    	rv.poly(pth);
+	    	//rv.poly(pth);
 	    	
 	    	var pth2 = this.getPath(rm, src.id,rm.controller.id);
-	    	rv.poly(pth2);
+	    	//rv.poly(pth2);
+	    }
+	    
+	    for(var e in [FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT]) {
+	    	var exitPositions = rm.find(e);
+	    	
+	    	if(exitPositions.length > 0) {
+	    		var roomName = describeExits(rm.name)[e.toString()];
+	    		
+	    		if(!Game.map.isRoomAvailable(roomName)) {
+	    			continue;
+	    		}
+	    		
+	    		graph.addVertex(e, 0);
+	    		graph.addEdge(e, spawn.id, exitPositions[0], spawn.pos);
+	    		graph.addEdge(e, rm.controller.id, exitPositions[0], rm.controller.pos);
+	    		
+	    		var pth3 = this.getPath(rm, e, spawn.id);
+	    		rv.poly(pth3);
+	    		
+	    		var pth4 = this.getPath(rm, e, rm.controller.id);
+	    		rv.poly(pth4);
+	    	}
 	    }
 	    
 	    //var pth = rm.memory.edges[spawn.id][1].path;
