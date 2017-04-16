@@ -85,8 +85,22 @@ module.exports = {
 			}
 			
 			
-			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, v1range));
-			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, v2range));
+			var pt1 = v2.findClosestByPath(parent.findAdjacent(rm, v1, v1range), {
+				costCallback: function(roomName, newCM) {
+					if(roomName === rm.name) {
+						return cm;
+					}
+					return newCM;
+				}
+			});
+			var pt2 = v1.findClosestByPath(parent.findAdjacent(rm, v2, v2range), {
+				costCallback: function(roomName, newCM) {
+					if(roomName === rm.name) {
+						return cm;
+					}
+					return newCM;
+				}
+			});
 			
 			var ret = PathFinder.search(pt1, pt2, {
 				roomCallback: function(roomName) {
@@ -148,8 +162,9 @@ module.exports = {
 	    	//rv.poly(pth2);
 	    }
 	    
-	    for(var e in [FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT]) {
-	    	var exitPositions = rm.find(e);
+	    var exits = [FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT];
+	    for(var e in exits) {
+	    	var exitPositions = rm.find(exits[e]);
 	    	
 	    	if(exitPositions.length > 0) {
 	    		/*var roomName = describeExits(rm.name)[e.toString()];
@@ -158,14 +173,14 @@ module.exports = {
 	    			continue;
 	    		}*/
 	    		
-	    		graph.addVertex(e, 0);
-	    		graph.addEdge(e, spawn.id, exitPositions[0], spawn.pos);
-	    		graph.addEdge(e, rm.controller.id, exitPositions[0], rm.controller.pos);
+	    		graph.addVertex(exits[e], 0);
+	    		graph.addEdge(exits[e], spawn.id, exitPositions[0], spawn.pos);
+	    		graph.addEdge(exits[e], rm.controller.id, exitPositions[0], rm.controller.pos);
 	    		
-	    		var pth3 = this.getPath(rm, e, spawn.id);
+	    		var pth3 = this.getPath(rm, exits[e], spawn.id);
 	    		rv.poly(pth3);
 	    		
-	    		var pth4 = this.getPath(rm, e, rm.controller.id);
+	    		var pth4 = this.getPath(rm, exits[e], rm.controller.id);
 	    		rv.poly(pth4);
 	    	}
 	    }
