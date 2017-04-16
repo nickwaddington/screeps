@@ -112,13 +112,13 @@ module.exports = {
 			}
 			cm.set(pt1.x, pt1.y, 1);
 			
+			
 			rm.memory.edges[vertex1].push({vertex: vertex2, path: p, start: pt1});
 			rm.memory.edges[vertex2].push({vertex: vertex1, path: revP, start: pt2});
 			rm.memory.numberOfEdges++;
 			
-			console.log(JSON.stringify(rm.memory.edges));
+			//console.log(JSON.stringify(rm.memory.edges));
 		};
-		
 		
 		var graph = new Graph();
 		var rv = new RoomVisual(rm.name);
@@ -171,6 +171,10 @@ module.exports = {
 	    	for(var c in currentPath) {
 	    		for(var x = -1; x <= 1; x++) {
 	    			for(var y = -1; y <= 1; y++) {
+	    				if(rm.memory.extensionPositions.length > 66) {
+	    					break;
+	    				}
+	    				
 	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0) {
 	    					if(Game.map.getTerrainAt(currentPath[c].x + x, currentPath[c].y + y, rm.name) !== 'wall') {
 	    						rm.memory.extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
