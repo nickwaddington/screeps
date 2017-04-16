@@ -211,8 +211,31 @@ module.exports = {
 	    	}
 	    }
 	    
-	    for(var e in rm.memory.extensionPositions) {
-	    	rv.circle(rm.memory.extensionPositions[e], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
+	    for(e in exits) {
+	    	var exit = exits[e];
+	    	
+	    	var currentPath = this.getPath(rm, spawn.id, exit);
+	    	
+	    	for(var c in currentPath) {
+	    		for(var x = -1; x <= 1; x++) {
+	    			for(var y = -1; y <= 1; y++) {
+	    				if(rm.memory.extensionPositions.length > 66) {
+	    					break;
+	    				}
+	    				
+	    				if(cm.get(currentPath[c].x + x, currentPath[c].y + y) === 0) {
+	    					if(Game.map.getTerrainAt(currentPath[c].x + x, currentPath[c].y + y, rm.name) !== 'wall') {
+	    						rm.memory.extensionPositions.push(rm.getPositionAt(currentPath[c].x + x, currentPath[c].y + y));
+	    						cm.set(currentPath[c].x + x, currentPath[c].y + y, 255);
+	    					}
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+	    
+	    for(var ex in rm.memory.extensionPositions) {
+	    	rv.circle(rm.memory.extensionPositions[ex], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
 	    }
 	    
 	    for(var ver1 in rm.memory.edges) {
