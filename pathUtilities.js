@@ -196,7 +196,7 @@ module.exports = {
 	    	for(var c in currentPath) {
 	    		for(var x = -1; x <= 1; x++) {
 	    			for(var y = -1; y <= 1; y++) {
-	    				if(rm.memory.extensionPositions.length > 66) {
+	    				if(rm.memory.extensionPositions.length >= 66) {
 	    					break;
 	    				}
 	    				
@@ -219,7 +219,7 @@ module.exports = {
 	    	for(var c in currentPath) {
 	    		for(var x = -1; x <= 1; x++) {
 	    			for(var y = -1; y <= 1; y++) {
-	    				if(rm.memory.extensionPositions.length > 66) {
+	    				if(rm.memory.extensionPositions.length >= 66) {
 	    					break;
 	    				}
 	    				
