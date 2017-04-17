@@ -80,10 +80,12 @@ module.exports = {
 				
 				if(current.vertex === vertex1) {
 					v1range = current.range;
+					console.log(current.pos.x, current.pos.y)
 					v1 = rm.getPositionAt(current.pos.x, current.pos.y);
 				}
 				if(current.vertex === vertex2) {
 					v2range = current.range;
+					console.log(current.pos.x, current.pos.y)
 					v2 = rm.getPositionAt(current.pos.x, current.pos.y);
 				}
 			}
