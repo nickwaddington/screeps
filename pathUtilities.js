@@ -66,22 +66,35 @@ module.exports = {
 			var temp = new PathFinder.CostMatrix();
 			rm.memory.costMatrix = temp.serialize();
 		}
-		Graph.prototype.addVertex = function(vertex, r) {
-			rm.memory.vertices.push({vertex: vertex, range: r});
+		Graph.prototype.addVertex = function(vertex, vPos, r) {
+			rm.memory.vertices.push({vertex: vertex, pos: vPos, range: r, creepList: []});
 			rm.memory.edges[vertex] = [];
 		};
-		Graph.prototype.addEdge = function(vertex1, vertex2, v1, v2) {
-			var v1range = 1;
-			var v2range = 1;
+		Graph.prototype.addEdge = function(vertex1, vertex2) {
+			var v1range = -1;
+			var v2range = -1;
+			var v1;
+			var v2;
 			for(var i in rm.memory.vertices) {
 				var current = rm.memory.vertices[i];
 				
 				if(current.vertex === vertex1) {
 					v1range = current.range;
+					v1 = current.pos;
 				}
 				if(current.vertex === vertex2) {
 					v2range = current.range;
+					v2 = current.pos;
 				}
+			}
+			
+			if(v1range === -1) {
+				console.log('Cannot find vertex ' + vertex1);
+				return;
+			}
+			if(v2range === -1) {
+				console.log('Cannot find vertex ' + vertex2);
+				return;
 			}
 			
 			
@@ -133,60 +146,61 @@ module.exports = {
 			//console.log(JSON.stringify(rm.memory.edges));
 		};
 		
+		//setup
 		var graph = new Graph();
 		var rv = new RoomVisual(rm.name);
 		
 		var spawn = rm.find(FIND_MY_SPAWNS)[0];
 		cm.set(spawn.pos.x, spawn.pos.y, 255);
-		graph.addVertex(spawn.id, 1);
-		graph.addVertex(rm.controller.id, 3);
 		
-	    var sources = rm.find(FIND_SOURCES_ACTIVE);
-	    
-	    var plotPoints = [];
-	    
-	    plotPoints = plotPoints.concat(this.findAdjacent(rm, spawn.pos, 1));
-	    plotPoints = plotPoints.concat(this.findAdjacent(rm, rm.controller.pos, 3));
-	    
+		var sources = rm.find(FIND_SOURCES_ACTIVE);
+		var exits = [FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT];
+		
+		//add vertices
+		graph.addVertex('spawn', spawn.pos, 1);
+		graph.addVertex('ctrl', rm.controller.pos, 3);
+		
 	    for(var i in sources) {
 	    	var src = sources[i];
 	    	
-	    	plotPoints = plotPoints.concat(this.findAdjacent(rm, src.pos, 1));
-	    	
-	    	graph.addVertex(src.id, 1);
-	    	graph.addEdge(src.id, rm.controller.id, src.pos, rm.controller.pos);
-	    	graph.addEdge(src.id, spawn.id, src.pos, spawn.pos);
+	    	graph.addVertex('source'+i, src.pos, 1);
 	    }
 	    
-	    var exits = [FIND_EXIT_TOP, FIND_EXIT_RIGHT, FIND_EXIT_BOTTOM, FIND_EXIT_LEFT];
 	    for(var e in exits) {
 	    	var exitPositions = rm.find(exits[e]);
 	    	
 	    	if(exitPositions.length > 0) {
-	    		/*var roomName = describeExits(rm.name)[e.toString()];
-	    		
-	    		if(!Game.map.isRoomAvailable(roomName)) {
-	    			continue;
-	    		}*/
-	    		
-	    		graph.addVertex(exits[e], 0);
-	    		graph.addEdge(exits[e], spawn.id, exitPositions[0], spawn.pos);
-	    		graph.addEdge(exits[e], rm.controller.id, exitPositions[0], rm.controller.pos);
+	    		graph.addVertex('exit' + e, 0);
 	    	}
 	    }
 	    
-	    //var pth = rm.memory.edges[spawn.id][1].path;
-	    //console.log(JSON.stringify(pth));
-	    //rv.poly(pth);
+	    //Add edges
+	    graph.addEdge('spawn','ctrl');
 	    
-	    for(i in plotPoints) {
-	    	rv.circle(plotPoints[i], {radius: 0.5, stroke: 'blue', fill: 'transparent'});
+	    for(var v in rm.memory.vertices) {
+	    	var current = rm.memory.vertices[v];
 	    	
-	    	cm.set(plotPoints[i].x, plotPoints[i].y, 6);
+	    	if(rm.memory.edges[current.vertex].length === 0) {
+	    		var closest = current.pos.findClosestByPath([spawn.pos, rm.controller.pos], {
+					costCallback: function(roomName, newCM) {
+						if(roomName === rm.name) {
+							return cm;
+						}
+						return newCM;
+					}
+	    		});
+	    		
+	    		if(spawn.pos.isEqualTo(closest)) {
+	    			graph.addEdge('spawn', current.vertex);
+	    		}
+	    		else {
+	    			graph.addEdge('ctrl', current.vertex);
+	    		}
+	    	}
 	    }
 	    
 	    //Get extension positions
-	    rm.memory.extensionPositions = [];
+	    /*rm.memory.extensionPositions = [];
 	    
 	    for(var j in sources) {
 	    	var source = sources[j];
@@ -236,7 +250,7 @@ module.exports = {
 	    
 	    for(var ex in rm.memory.extensionPositions) {
 	    	rv.circle(rm.memory.extensionPositions[ex], {radius: 0.3, stroke: 'yellow', fill: 'transparent'});
-	    }
+	    }*/
 	    
 	    for(var ver1 in rm.memory.edges) {
 	    	for(var ver2 in rm.memory.edges[ver1]) {

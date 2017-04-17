@@ -11,7 +11,7 @@ module.exports.loop = function () {
     for(var r in Game.rooms) {
     	var rm = Game.rooms[r];
     	
-    	if(typeof rm.memory.type === 'undefined') {
+    	if(/*typeof rm.memory.type === 'undefined'*/true) {
     		rm.initialise();
     	}
     	
