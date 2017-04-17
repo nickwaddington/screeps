@@ -172,7 +172,7 @@ module.exports = {
 	    	var exitPositions = rm.find(exits[e]);
 	    	
 	    	if(exitPositions.length > 0) {
-	    		graph.addVertex('exit' + e, 0);
+	    		graph.addVertex('exit' + e, exitPositions[0], 0);
 	    	}
 	    }
 	    
