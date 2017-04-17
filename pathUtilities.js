@@ -80,12 +80,10 @@ module.exports = {
 				
 				if(current.vertex === vertex1) {
 					v1range = current.range;
-					console.log(current.pos.x, current.pos.y)
 					v1 = rm.getPositionAt(current.pos.x, current.pos.y);
 				}
 				if(current.vertex === vertex2) {
 					v2range = current.range;
-					console.log(current.pos.x, current.pos.y)
 					v2 = rm.getPositionAt(current.pos.x, current.pos.y);
 				}
 			}
@@ -183,7 +181,6 @@ module.exports = {
 	    	var current = rm.memory.vertices[v];
 	    	
 	    	if(rm.memory.edges[current.vertex].length === 0) {
-	    		console.log(current.vertex, current.pos.x, current.pos.y)
 	    		var currentPos = rm.getPositionAt(current.pos.x, current.pos.y);
 	    		var closest = currentPos.findClosestByPath([spawn.pos, rm.controller.pos], {
 					costCallback: function(roomName, newCM) {
