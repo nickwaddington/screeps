@@ -67,7 +67,7 @@ module.exports = {
 			rm.memory.costMatrix = temp.serialize();
 		}
 		Graph.prototype.addVertex = function(vertex, vPos, r) {
-			rm.memory.vertices.push({vertex: vertex, pos: vPos, range: r, creepList: []});
+			rm.memory.vertices.push({vertex: vertex, pos: {x: vPos.x, y: vPos.y}, range: r, creepList: []});
 			rm.memory.edges[vertex] = [];
 		};
 		Graph.prototype.addEdge = function(vertex1, vertex2) {
@@ -181,7 +181,8 @@ module.exports = {
 	    	var current = rm.memory.vertices[v];
 	    	
 	    	if(rm.memory.edges[current.vertex].length === 0) {
-	    		var closest = current.pos.findClosestByPath([spawn.pos, rm.controller.pos], {
+	    		var currentPos = rm.getPositionAt(current.pos.x, current.pos.y);
+	    		var closest = currentPos.findClosestByPath([spawn.pos, rm.controller.pos], {
 					costCallback: function(roomName, newCM) {
 						if(roomName === rm.name) {
 							return cm;
