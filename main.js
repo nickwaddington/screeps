@@ -3,8 +3,8 @@
 var RoomCluster = require('roomCluster');
 
 RoomPosition.prototype.toString = function() {
-	var xString = this.x;
-	var yString = this.y;
+	var xString = this.x.toString();
+	var yString = this.y.toString();
 	
 	if(this.x < 10) {
 		xString = '0' + xString;
@@ -12,8 +12,6 @@ RoomPosition.prototype.toString = function() {
 	if(this.y < 10) {
 		yString = '0' + yString;
 	}
-	
-	console.log(xString,yString,this.roomName)
 	
 	return xString + yString + this.roomName;
 };
