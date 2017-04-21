@@ -83,7 +83,9 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	var path = pathData.path;
 	var temp = new Array(path.length);
 	for(var t in temp) {
-		temp[t] = new RoomPosition(path[t].x, path[t].y, path[t].roomName);
+		console.log(JSON.stringify(path[t]));
+		temp[t] = path[t];
+		console.log(JSON.stringify(temp[t]));
 	}
 	temp.pop();
 	var reversePath = temp.reverse();
