@@ -51,7 +51,9 @@ module.exports.loop = function () {
     
     for(var r in Game.rooms) {
     	var rm = Game.rooms[r];
-    	rm.memory = rm.memory || {};
+    	if(typeof rm.memory === 'undefined') {
+    		rm.memory = {};
+    	}
     }
     
     var cluster = new RoomCluster('sim');
