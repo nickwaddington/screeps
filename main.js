@@ -35,7 +35,7 @@ Room.prototype.getCostMatrix = function() {
 		return cm;
 	}
 	else {
-		return PathFinder.deserialize(Memory.rooms[this.roomName].costMatrix);
+		return PathFinder.deserialize(Memory.rooms[this.name].costMatrix);
 	}
 };
 Room.prototype.saveCostMatrix = function(cm) {
