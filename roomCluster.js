@@ -76,6 +76,10 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 		swampCost: 10
 	});
 	
+	if(!pathData.path[0]) {
+		console.log(vertexName1, vertexName2, point1.x, point1.y, point2.x, point2.y);
+	}
+	
 	var path = pathData.path;
 	var temp = new Array(path.length);
 	for(var t in temp) {
