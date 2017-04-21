@@ -77,7 +77,10 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	});
 	
 	var path = pathData.path;
-	var temp = path;
+	var temp = new Array(path.length);
+	for(var t in temp) {
+		temp[t] = path[t];
+	}
 	temp.pop();
 	var reversePath = temp.reverse();
 	reversePath.push(point1);
