@@ -89,7 +89,7 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	for(var i in path) {
 		if(path[i].roomName !== point1Room) {
 			point1Room.saveCostMatrix(cm);
-			point1Room = path[i].roomName;
+			point1Room = Game.rooms[point1.roomName];
 			cm = point1Room.getCostMatrix();
 		}
 		
