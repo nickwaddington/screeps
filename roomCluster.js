@@ -81,13 +81,14 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	}
 	
 	var path = pathData.path;
-	var temp = new Array(path.length);
+	/*var temp = new Array(path.length);
 	for(var t in temp) {
 		temp[t] = path[t];
 	}
 	temp.pop();
 	var reversePath = temp.reverse();
-	reversePath.push(point1);
+	reversePath.push(point1);*/
+	var reversePath = path;
 	
 	var point1Room = Game.rooms[point1.roomName];
 	var cm = point1Room.getCostMatrix();
