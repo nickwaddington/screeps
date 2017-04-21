@@ -4,7 +4,7 @@ function roomCluster(homeRoomName) {
 	this.homeRoomName = homeRoomName;
 	
 	if(typeof Memory.roomClusters === 'undefined') {
-		Memory.roomClusters = [];
+		Memory.roomClusters = {};
 	}
 	if(typeof Memory.roomClusters[homeRoomName] === 'undefined') {
 		this.roomList = [homeRoomName];
