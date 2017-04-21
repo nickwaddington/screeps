@@ -14,9 +14,7 @@ function roomCluster(homeRoomName) {
 		
 		this.initialisePaths();
 		
-		//TODO intiialise structure positions here
-		
-		
+		this.initialiseStructurePositions();
 	}
 	else {
 		var cluster = Memory.roomClusters[homeRoomName];
@@ -25,12 +23,6 @@ function roomCluster(homeRoomName) {
 		this.nodeList = cluster.nodeList;
 		this.edgeList = cluster.edgeList;
 	}
-	
-	//TODO manage spawning here
-	
-	
-	//TODO run creep actions here
-	
 	this.save();
 }
 
@@ -81,14 +73,8 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	}
 	
 	var path = pathData.path;
-	var temp = new Array(path.length);
-	for(var t = 0; t < path.length; t++) {
-		console.log(JSON.stringify(path[t]));
-		temp[t] = path[t];
-		console.log(JSON.stringify(temp[t]));
-	}
-	temp.pop();
-	var reversePath = temp.reverse();
+	var reversePath = path.reverse();
+	reversePath.shift();
 	reversePath.push(point1);
 	
 	var point1Room = Game.rooms[point1.roomName];
@@ -158,5 +144,14 @@ roomCluster.prototype.initialisePaths = function() {
     
     rm.saveCostMatrix(cm);
 }
+roomCluster.prototype.initialiseStructurePositions = function() {
+	//TODO
+};
+roomCluster.prototype.runCreeps = function() {
+	//TODO
+};
+roomCluster.prototype.manageSpawning = function() {
+	//TODO
+};
 
 module.exports = roomCluster;

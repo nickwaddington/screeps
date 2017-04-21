@@ -9,6 +9,4 @@ module.exports = function() {
 	else {
 		this.memory.type = 'other';
 	}
-	
-	pathUtilities.initialisePaths(this);
 };

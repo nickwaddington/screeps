@@ -1,5 +1,4 @@
-//Creep.prototype.run = require('creepRun');
-//Room.prototype.initialise = require('roomInitialise');
+Room.prototype.initialise = require('roomInitialise');
 var RoomCluster = require('roomCluster');
 
 RoomPosition.prototype.toString = function() {
@@ -63,7 +62,7 @@ module.exports.loop = function () {
     for(var r in Game.rooms) {
     	var rm = Game.rooms[r];
     	if(typeof rm.memory === 'undefined') {
-    		rm.memory = {};
+    		rm.initialise();
     	}
     }
     
@@ -71,21 +70,5 @@ module.exports.loop = function () {
     
     var rv = new RoomVisual('sim');
     rv.displayPaths(cluster);
-    
-    /*for(var r in Game.rooms) {
-    	var rm = Game.rooms[r];
-    	
-    	if(typeof rm.memory.type === 'undefined') {
-    		rm.initialise();
-    	}
-    	
-    	var rv = new RoomVisual(rm.name);
-    	rv.text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU",5,2);
-    }
-    
-    for(var currentCreep in Game.creeps) {
-        var crp = Game.creeps[currentCreep];
-        crp.run();
-    }*/
-    
+    rv.text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU",5,2);
 };
