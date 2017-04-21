@@ -4,9 +4,9 @@ module.exports = function() {
 	var spawnList = this.find(FIND_MY_SPAWNS);
 	
 	if(spawnList.length > 0) {
-		this.memory.type = 'main';
+		Memory.rooms[this.name].type = 'main';
 	}
 	else {
-		this.memory.type = 'other';
+		Memory.rooms[this.name].type = 'other';
 	}
 };

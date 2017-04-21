@@ -59,12 +59,12 @@ module.exports.loop = function () {
         }
     }
     
-    /*for(var r in Game.rooms) {
+    for(var r in Game.rooms) {
     	var rm = Game.rooms[r];
     	if(typeof rm.memory === 'undefined') {
     		rm.initialise();
     	}
-    }*/
+    }
     
     var cluster = new RoomCluster('sim');
     
