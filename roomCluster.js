@@ -44,7 +44,7 @@ roomCluster.prototype.save = function() {
 	Memory.roomClusters[this.homeRoomName] = data;
 };
 roomCluster.prototype.addNode = function(vertexName, vertexPos, range) {
-	this.nodeList.push({name: vertexName, pos: vertexPos.toString(), range: r});
+	this.nodeList.push({name: vertexName, pos: vertexPos.toString(), range: range});
 	this.edgeList[vertexName] = {length: 0};
 };
 roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
