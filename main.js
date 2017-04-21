@@ -49,6 +49,11 @@ module.exports.loop = function () {
         }
     }
     
+    for(var r in Game.rooms) {
+    	var rm = Game.rooms[r];
+    	rm.memory = rm.memory || {};
+    }
+    
     var cluster = new RoomCluster('sim');
     
     /*for(var r in Game.rooms) {
