@@ -134,7 +134,7 @@ roomCluster.prototype.initialisePaths = function() {
     for(var v in this.nodeList) {
     	var current = this.nodeList[v];
     	
-    	if(this.edges[current.name].length === 0) {
+    	if(this.edgeList[current.name].length === 0) {
     		var currentPos = memoryUtilities.posFromString(current.pos);
     		var closest = currentPos.findClosestByPath([spawn.pos, rm.controller.pos], { costCallback: costCallback });
     		
