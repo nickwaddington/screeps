@@ -1,5 +1,5 @@
 module.exports = {
-	getPathTime: function(rm, body, path, load, fatigue) {
+	getPathTime: function(body, path, load, fatigue) {
 		if(typeof load === 'undefined') {
 			load = 0;
 		}
@@ -24,7 +24,7 @@ module.exports = {
 		
 		var time = Math.ceil(fatigue / numMove); //Start time at time it will take for fatigue to reach 0
 		for(var p = 0; p < path.length; p++) {
-			var terrain = Game.map.getTerrainAt(path[p].x, path[p].y, rm.name);
+			var terrain = Game.map.getTerrainAt(path[p].x, path[p].y, path[p].roomName);
 			
 			if(false) { //road TODO
 				time += Math.ceil((weight / 2) / numMove);
@@ -40,7 +40,8 @@ module.exports = {
 		
 		return time;
 	},
-	findAdjacent: function(rm, p, range) {
+	findAdjacent: function(p, range) {
+		var rm = Game.rooms[p.roomName];
 		var positions = rm.lookForAtArea(LOOK_TERRAIN, p.y-range, p.x-range, p.y+range, p.x+range, true);
 		
 		var filtered = _.filter(positions, function(o) {

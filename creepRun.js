@@ -1,7 +1,7 @@
 module.exports = function() {
-	var MOVE_TO_SOURCE = 1;
-	var MINE_SOURCE = 2;
-	var COMPLETE_JOBS = 3;
+	const MOVE_TO_SOURCE = 1;
+	const MINE_SOURCE = 2;
+	const COMPLETE_JOBS = 3;
 	
 	//handle movement
 	
