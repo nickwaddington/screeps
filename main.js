@@ -13,7 +13,7 @@ RoomPosition.prototype.toString = function() {
 		yString = '0' + yString;
 	}
 	
-	return xString + ystring + this.roomName;
+	return xString + yString + this.roomName;
 };
 RoomPosition.prototype.getInRange = function(range) {
 	var rm = Game.rooms[this.roomName];
@@ -29,7 +29,6 @@ RoomPosition.prototype.getInRange = function(range) {
 	return arr;
 };
 Room.prototype.getCostMatrix = function() {
-	console.log(this.name)
 	if(typeof Memory.rooms[this.name].costMatrix === 'undefined') {
 		var cm = new PathFinder.CostMatrix();
 		Memory.rooms[this.name].costMatrix = cm.serialize();
