@@ -39,7 +39,7 @@ Room.prototype.getCostMatrix = function() {
 	}
 };
 Room.prototype.saveCostMatrix = function(cm) {
-	Memory.rooms[this.roomName].costMatrix = cm.serialize();
+	Memory.rooms[this.name].costMatrix = cm.serialize();
 };
 
 module.exports.loop = function () {
