@@ -76,7 +76,7 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 		swampCost: 10
 	});
 	
-	var path = ret.path;
+	var path = pathData.path;
 	var temp = path;
 	temp.pop();
 	var reversePath = temp.reverse();

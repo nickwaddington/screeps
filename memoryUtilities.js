@@ -4,9 +4,6 @@ module.exports = {
 		var y = parseInt(string.slice(2,4));
 		var name = string.slice(4);
 		
-		console.log(string);
-		console.log(x,y,name);
-		
 		return new RoomPosition(x, y, name);
 	}
 };
