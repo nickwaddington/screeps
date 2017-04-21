@@ -13,6 +13,8 @@ RoomPosition.prototype.toString = function() {
 		yString = '0' + yString;
 	}
 	
+	console.log(xString + yString + this.roomName)
+	
 	return xString + yString + this.roomName;
 };
 RoomPosition.prototype.getInRange = function(range) {
