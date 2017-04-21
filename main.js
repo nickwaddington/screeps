@@ -29,10 +29,10 @@ RoomPosition.prototype.getInRange = function(range) {
 	return arr;
 };
 Room.prototype.getCostMatrix = function() {
-	console.log(this.roomName)
-	if(typeof Memory.rooms[this.roomName].costMatrix === 'undefined') {
+	console.log(this.name)
+	if(typeof Memory.rooms[this.name].costMatrix === 'undefined') {
 		var cm = new PathFinder.CostMatrix();
-		Memory.rooms[this.roomName].costMatrix = cm.serialize();
+		Memory.rooms[this.name].costMatrix = cm.serialize();
 		return cm;
 	}
 	else {
