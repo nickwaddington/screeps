@@ -3,9 +3,10 @@ var memoryUtilities = require('memoryUtilities');
 function roomCluster(homeRoomName) {
 	this.homeRoomName = homeRoomName;
 	
-	var cluster = Memory.roomClusters[homeRoomName];
-	
-	if(typeof cluster === 'undefined') {
+	if(typeof Memory.roomClusters === 'undefined') {
+		Memory.roomClusters = [];
+	}
+	if(typeof Memory.roomClusters[homeRoomName] === 'undefined') {
 		this.roomList = [homeRoomName];
 		this.creepList = [];
 		this.nodeList = [];
@@ -18,6 +19,7 @@ function roomCluster(homeRoomName) {
 		
 	}
 	else {
+		cluster = Memory.roomClusters[homeRoomName];
 		this.roomList = cluster.roomList.split();
 		this.creepList = cluster.creepList.split();
 		this.nodeList = cluster.nodeList;
