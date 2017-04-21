@@ -82,7 +82,7 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	
 	var path = pathData.path;
 	var temp = new Array(path.length);
-	for(var t in temp) {
+	for(var t = 0; t < path.length; t++) {
 		console.log(JSON.stringify(path[t]));
 		temp[t] = path[t];
 		console.log(JSON.stringify(temp[t]));
