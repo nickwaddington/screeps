@@ -41,6 +41,17 @@ Room.prototype.getCostMatrix = function() {
 Room.prototype.saveCostMatrix = function(cm) {
 	Memory.rooms[this.name].costMatrix = cm.serialize();
 };
+RoomVisual.prototype.displayPaths = function(roomCluster) {
+	for(var i in roomCluster.edgeList) {
+		for(var j in roomCluster.edgeList[i]) {
+			if(j === 'length') {
+				continue;
+			}
+			this.poly(roomCluster.edgeList[i][j]);
+		}
+	}
+};
+
 
 module.exports.loop = function () {
     for(var name in Memory.creeps) {
@@ -57,6 +68,9 @@ module.exports.loop = function () {
     }
     
     var cluster = new RoomCluster('sim');
+    
+    var rv = new RoomVisual('sim');
+    rv.displayPaths(cluster);
     
     /*for(var r in Game.rooms) {
     	var rm = Game.rooms[r];

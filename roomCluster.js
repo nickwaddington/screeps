@@ -19,7 +19,7 @@ function roomCluster(homeRoomName) {
 		
 	}
 	else {
-		cluster = Memory.roomClusters[homeRoomName];
+		var cluster = Memory.roomClusters[homeRoomName];
 		this.roomList = cluster.roomList.split();
 		this.creepList = cluster.creepList.split();
 		this.nodeList = cluster.nodeList;
