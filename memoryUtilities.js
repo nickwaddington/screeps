@@ -26,7 +26,7 @@ var mod = {
 				string = string + ',' + path[i].toString();
 			}
 		}
-		
+		console.log(string);
 		return string;
 	}
 };
