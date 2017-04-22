@@ -98,8 +98,8 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	
 	this.edgeList[vertexName1].length++;
 	this.edgeList[vertexName2].length++;
-	this.edgeList[vertexName1][vertexName2] = {start: point1.toString(), path: path};
-	this.edgeList[vertexName2][vertexName1] = {start: point2.toString(), path: reversePath};
+	this.edgeList[vertexName1][vertexName2] = {start: point1.toString(), path: memoryUtilities.pathToString(path)};
+	this.edgeList[vertexName2][vertexName1] = {start: point2.toString(), path: memoryUtilities.pathToString(reversePath)};
 };
 roomCluster.prototype.initialisePaths = function() {
 	var rm = Game.rooms[this.homeRoomName];
@@ -155,7 +155,7 @@ roomCluster.prototype.getNextStructurePosition = function(type) {
 			for(var s in this.sourceList) {
 				for(var i in this.edgeList['source_' + this.sourceList[s].id]) {
 					if(i !== 'length') {
-						var path = this.edgeList['source_' + this.sourceList[s].id][i].path;
+						var path = memoryUtilities.pathFromString(this.edgeList['source_' + this.sourceList[s].id][i].path);
 						var rm = Game.rooms[path[0].roomName];
 						var cm = rm.getCostMatrix();
 						
