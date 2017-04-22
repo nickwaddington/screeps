@@ -40,4 +40,11 @@ module.exports = {
 		
 		return time;
 	},
+	deepCopyPath: function(path) {
+		var copy = new Array(path.length);
+		for(var i = 0; i < path.length; i++) {
+			copy[i] = new RoomPosition(path[i].x, path[i].y, path[i].roomName);
+		}
+		return copy;
+	}
 };

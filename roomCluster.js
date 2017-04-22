@@ -1,4 +1,5 @@
 var memoryUtilities = require('memoryUtilities');
+var pathUtilities = require('pathUtilities');
 
 function roomCluster(homeRoomName) {
 	this.homeRoomName = homeRoomName;
@@ -77,7 +78,9 @@ roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	}
 	
 	var path = pathData.path;
-	var reversePath = path.reverse();
+	
+	var copy = pathUtilities.deepCopyPath(path);
+	var reversePath = copy.reverse();
 	reversePath.shift();
 	reversePath.push(point1);
 	
