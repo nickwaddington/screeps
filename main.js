@@ -1,5 +1,6 @@
 Room.prototype.initialise = require('roomInitialise');
 var RoomCluster = require('roomCluster');
+var memoryUtilities = require('memoryUtilities');
 
 RoomPosition.prototype.toString = function() {
 	var xString = this.x.toString();
