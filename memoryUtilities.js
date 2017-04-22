@@ -7,7 +7,8 @@ var mod = {
 		return new RoomPosition(x, y, name);
 	},
 	pathFromString: function(string) {
-		var arr = string.split();
+		console.log(string);
+		var arr = string.split(',');
 		
 		for(var i in arr) {
 			arr[i] = this.posFromString(arr[i]);
