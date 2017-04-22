@@ -14,6 +14,7 @@ function roomCluster(homeRoomName) {
 		this.edgeList = {};
 		this.constructionList = {};
 		this.sourceList = [];
+		this.jobList = [];
 		
 		this.initialisePaths();
 	}
@@ -25,8 +26,8 @@ function roomCluster(homeRoomName) {
 		this.edgeList = cluster.edgeList;
 		this.constructionList = cluster.constructionList;
 		this.sourceList = cluster.sourceList;
+		this.jobList = cluster.jobList;
 	}
-	this.save();
 }
 
 roomCluster.prototype.save = function() {
@@ -37,12 +38,23 @@ roomCluster.prototype.save = function() {
 	data.edgeList = this.edgeList;
 	data.constructionList = this.constructionList;
 	data.sourceList = this.sourceList;
+	data.jobList = this.jobList;
 	
 	Memory.roomClusters[this.homeRoomName] = data;
 };
 roomCluster.prototype.addNode = function(vertexName, vertexPos, range) {
 	this.nodeList.push({name: vertexName, pos: vertexPos.toString(), range: range});
 	this.edgeList[vertexName] = {length: 0};
+	
+	var rm = Game.rooms[vertexPos.roomName];
+	var cm = rm.getCostMatrix();
+	
+	var accessPositions = vertexPos.getInRange(range);
+	
+	for(var ap in accessPositions) {
+		var current = accessPositions[ap];
+		cm.set(current.x, current.y, 10);
+	}
 };
 roomCluster.prototype.addEdge = function(vertexName1, vertexName2) {
 	var vertex1 = _.find(this.nodeList, function(v) { return v.name === vertexName1 });

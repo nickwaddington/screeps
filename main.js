@@ -69,6 +69,7 @@ module.exports.loop = function () {
     
     var cluster = new RoomCluster('sim');
     var extensionPos = cluster.getNextStructurePosition(STRUCTURE_EXTENSION);
+    cluster.save();
     
     var rv = new RoomVisual('sim');
     rv.displayPaths(cluster);
