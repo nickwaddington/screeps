@@ -46,7 +46,7 @@ RoomVisual.prototype.displayPaths = function(roomCluster) {
 			if(j === 'length') {
 				continue;
 			}
-			this.poly(roomCluster.edgeList[i][j].path);
+			this.poly(memoryUtilities.pathFromString(roomCluster.edgeList[i][j].path));
 		}
 	}
 };
