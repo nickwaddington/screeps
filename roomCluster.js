@@ -23,6 +23,7 @@ function roomCluster(homeRoomName) {
 		this.nodeList = cluster.nodeList;
 		this.edgeList = cluster.edgeList;
 		this.constructionList = cluster.constructionList;
+		this.sourceList = cluster.sourceList;
 	}
 	this.save();
 }
@@ -34,6 +35,7 @@ roomCluster.prototype.save = function() {
 	data.nodeList = this.nodeList;
 	data.edgeList = this.edgeList;
 	data.constructionList = this.constructionList;
+	data.sourceList = this.sourceList;
 	
 	Memory.roomClusters[this.homeRoomName] = data;
 };
@@ -156,6 +158,7 @@ roomCluster.prototype.getNextStructurePosition = function(type) {
 						var path = this.edgeList['source_' + this.sourceList[s].id][i].path;
 						var rm = Game.rooms[path[0].roomName];
 						var cm = rm.getCostMatrix();
+						
 						
 						for(var p in path) {
 							var currentPos = path[p];
