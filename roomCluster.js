@@ -11,10 +11,10 @@ function roomCluster(homeRoomName) {
 		this.creepList = [];
 		this.nodeList = [];
 		this.edgeList = {};
+		this.constructionList = {};
+		this.sourceList = [];
 		
 		this.initialisePaths();
-		
-		this.initialiseStructurePositions();
 	}
 	else {
 		var cluster = Memory.roomClusters[homeRoomName];
@@ -22,6 +22,7 @@ function roomCluster(homeRoomName) {
 		this.creepList = cluster.creepList.split();
 		this.nodeList = cluster.nodeList;
 		this.edgeList = cluster.edgeList;
+		this.constructionList = cluster.constructionList;
 	}
 	this.save();
 }
@@ -32,6 +33,7 @@ roomCluster.prototype.save = function() {
 	data.creepList = this.creepList.join();
 	data.nodeList = this.nodeList;
 	data.edgeList = this.edgeList;
+	data.constructionList = this.constructionList;
 	
 	Memory.roomClusters[this.homeRoomName] = data;
 };
@@ -110,7 +112,8 @@ roomCluster.prototype.initialisePaths = function() {
 	this.addNode('controller', rm.controller.pos, 3);
 	
     for(var i in sources) {
-    	this.addNode('source'+i, sources[i].pos, 1);
+    	this.addNode('source_' + sources[i].id, sources[i].pos, 1);
+    	sourceList.push({id: sources[i].id});
     }
     
     for(var e in exits) {
@@ -144,8 +147,41 @@ roomCluster.prototype.initialisePaths = function() {
     
     rm.saveCostMatrix(cm);
 }
-roomCluster.prototype.initialiseStructurePositions = function() {
-	//TODO
+roomCluster.prototype.getNextStructurePosition = function(type) {
+	switch(type) {
+		case STRUCTURE_EXTENSION:
+			for(var s in this.sourceList) {
+				for(var i in roomCluster.edgeList['source_' + this.sourceList[s].id]) {
+					if(i !== 'length') {
+						var path = roomCluster.edgeList['source_' + this.sourceList[s].id][i].path;
+						var rm = Game.rooms[path[0].roomName];
+						var cm = rm.getCostMatrix();
+						
+						for(var p in path) {
+							var currentPos = path[p];
+							
+							if(currentPos.roomName !== rm.name) {
+								rm = Game.rooms[currentPos.roomName];
+								cm = rm.getCostMatrix();
+							}
+							
+							var candidates = currentPos.getInRange(1);
+							
+							for(var c in candidates) {
+								if(cm.get(candidates[c].x, candidates[c].y, candidates[c].roomName) === 0) {
+									return candidates[c];
+								}
+							}
+						}
+					}
+				}
+			}
+			console.log('No space found for ' + type);
+			return {};
+			break;
+		default:
+			console.log('unknown type: ' + type);
+	}
 };
 roomCluster.prototype.runCreeps = function() {
 	//TODO

@@ -67,8 +67,10 @@ module.exports.loop = function () {
     }
     
     var cluster = new RoomCluster('sim');
+    var extensionPos = cluster.getNextStructurePosition(STRUCTURE_EXTENSION);
     
     var rv = new RoomVisual('sim');
     rv.displayPaths(cluster);
+    rv.circle(extensionPos);
     rv.text("Time: " + Game.time + "  " + Math.round(Game.cpu.getUsed()*100/Game.cpu.limit) + "% CPU",5,2);
 };
