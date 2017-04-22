@@ -113,7 +113,7 @@ roomCluster.prototype.initialisePaths = function() {
 	
     for(var i in sources) {
     	this.addNode('source_' + sources[i].id, sources[i].pos, 1);
-    	sourceList.push({id: sources[i].id});
+    	this.sourceList.push({id: sources[i].id});
     }
     
     for(var e in exits) {
