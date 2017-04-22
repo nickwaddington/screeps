@@ -151,9 +151,9 @@ roomCluster.prototype.getNextStructurePosition = function(type) {
 	switch(type) {
 		case STRUCTURE_EXTENSION:
 			for(var s in this.sourceList) {
-				for(var i in roomCluster.edgeList['source_' + this.sourceList[s].id]) {
+				for(var i in this.edgeList['source_' + this.sourceList[s].id]) {
 					if(i !== 'length') {
-						var path = roomCluster.edgeList['source_' + this.sourceList[s].id][i].path;
+						var path = this.edgeList['source_' + this.sourceList[s].id][i].path;
 						var rm = Game.rooms[path[0].roomName];
 						var cm = rm.getCostMatrix();
 						
